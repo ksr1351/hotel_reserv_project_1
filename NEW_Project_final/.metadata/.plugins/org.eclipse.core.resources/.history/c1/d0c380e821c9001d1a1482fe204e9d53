@@ -1,0 +1,25 @@
+package testBoard.board.controller;
+
+import java.util.Calendar;
+
+public class test {
+	
+	
+	public static void main(String[] args) {
+		
+		String data1 = "2023-04-01";
+		
+		String data2 = "2023-04-03";
+		
+		String price = "150,000원";
+		
+		
+		
+		
+		
+		
+	}
+	
+
+	
+}

@@ -1,0 +1,276 @@
+package testBoard.board.controller;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.ibatis.type.IntegerTypeHandler;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import testBoard.board.dto.BookingDTO;
+import testBoard.board.dto.HotelSearchDTO;
+import testBoard.board.dto.Hotel_Detail_ConDTO;
+import testBoard.board.dto.Hotel_Detail_InfoDTO;
+import testBoard.board.dto.Hotel_infoDTO;
+import testBoard.board.dto.PayCheckDTO;
+import testBoard.board.dto.PayPageDTO;
+import testBoard.board.dto.Room_Banner_InfoDTO;
+import testBoard.board.dto.SearchDTO;
+import testBoard.board.service.HotelService;
+import testBoard.login.commons.session.SessionConst;
+import testBoard.login.dto.SessionDTO;
+
+// http://localhost:8090/
+
+@Controller
+public class TestBoardController {
+
+	private final HotelService service;
+
+	@Autowired
+	public TestBoardController(HotelService service) {
+		this.service = service;
+	}
+
+//	@GetMapping("/")
+//	public String mainPage1() {
+//		
+//		return "testMainPage/index";
+//	}
+
+	///////////////////////////////////////////////////////////////////////
+	@GetMapping("/board")
+	public String mainPage2() {
+
+		return "board/board";
+	}
+
+	@GetMapping("/board/notice_board")
+	public String boardPage() {
+
+		return "board/notice_board";
+	}
+
+	//////////////////////////////////////////////////////////////
+	@GetMapping("/check")
+	public String mainPage3(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) SessionDTO sessionDTO,
+			Model model) {
+
+		System.out.println("컨트롤러 호출");
+
+		System.out.println(sessionDTO);
+
+		if (sessionDTO != null)
+			model.addAttribute("myPage", service.myPageProcess(sessionDTO.getMem_code()));
+
+		return "testMainPage/check";
+	}
+
+	@PostMapping("/bookingCancel")
+	public String bookingCancel(@RequestParam String booking_check) {
+
+		service.bookingCancelProcess(Integer.parseInt(booking_check));
+
+		return "redirect:/check";
+	}
+
+	@GetMapping("/room")
+	public String mainPage5(HotelSearchDTO hotelSearchDTO, 
+			SearchDTO searchDTO,
+			Model model,
+			
+			@RequestParam(value = "num", required = false) Integer num) {
+
+		model.addAttribute("Search", searchDTO);
+
+		model.addAttribute("list", service.hotelListAllProcess());
+		
+		System.out.println(hotelSearchDTO);
+		
+		
+		  if(searchDTO != null && num != null && num == 2) { // bedType 영어 > 한글 변환
+		  List<String> bedTypeInEnglish = hotelSearchDTO.getBedType(); Map<String, String>
+		  translationMap = new HashMap<>(); translationMap.put("single", "싱글베드 1개");
+		  translationMap.put("double", "더블베드"); translationMap.put("twin", "싱글베드 2개");
+		  
+		  List<String> bedTypeInKorean = bedTypeInEnglish.stream()
+		  .map(translationMap::get) // key -> translationMap.get(key)
+		  .collect(Collectors.toList());
+		  
+		  hotelSearchDTO.setBedType(bedTypeInKorean);
+		  
+		  model.addAttribute("list", service.searchHotelListProcess(hotelSearchDTO));
+		  
+		  }else {
+		 
+		 
+		 }
+		 
+
+		return "testMainPage/room";
+	}
+
+	@GetMapping("/rel")
+	public String mainPage4(SearchDTO searchDTO, Model model) {
+
+		model.addAttribute("hotel_subInfo", service.hotelSubInfoProcess(searchDTO.getHotel_code()));
+
+		model.addAttribute("roomList", service.roomListProcess(searchDTO));
+
+		List<Hotel_Detail_ConDTO> hotel_detail = service.Hotel_Detail_infoProcess(searchDTO.getHotel_code());
+
+		model.addAttribute("hotel_detail", hotel_detail);
+
+		List<List<Hotel_Detail_InfoDTO>> hotel_infoList = hotel_detail.stream().map(n -> n.getHotel_detail_InfoDTO())
+				.collect(Collectors.toList());
+
+		List<Hotel_infoDTO> hotel_info_detail = new ArrayList<>();
+
+		for (int i = 0; i < hotel_infoList.size(); i++) {
+
+			for (int j = 0; j < hotel_infoList.get(i).size(); j++) {
+
+				hotel_info_detail.add(new Hotel_infoDTO(hotel_infoList.get(i).get(j).getInfo()));
+
+			}
+
+		}
+
+		List<Hotel_infoDTO> hotel_info = hotel_info_detail.stream().distinct().collect(Collectors.toList());
+
+		model.addAttribute("hotel_info", hotel_info);
+
+		model.addAttribute("searchDTO", searchDTO);
+
+		return "testMainPage/rel";
+	}
+
+	/////////////////////////////////////////////////////////////////////////////
+//	@GetMapping("/login")
+//	public String loginPage() {
+//		
+//		
+//		return "login2/login.html";
+//	}
+
+//	@GetMapping("/login/member")
+//	public String loginMember() {
+//			
+//		return "login2/membership.html";
+//		              
+//	}	
+
+//	@GetMapping("/login/signup_finish")
+//	public String loginSuccess() {
+//		
+//		return "login2/signup_finish.html";
+//	}
+//	
+	/////////////////////////////////////////////////////////////////////////
+
+	@GetMapping("/info")
+	public String info() {
+		return "testMainPage/info";
+	}
+
+	@GetMapping("/management")
+	public String management(Model model) {
+
+		model.addAttribute("manageList", service.managementProcess());
+
+		return "testMainPage/management";
+
+	}
+
+//	@GetMapping("/pay")
+//	public String pay() {
+//	
+//		return "testMainPage/pay";
+//		
+//	}
+
+	@GetMapping("/pay")
+	public String payBooking(SearchDTO searchDTO, int room_code,
+			@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) SessionDTO sessionDTO, Model model) {
+
+		System.out.println(searchDTO);
+
+		System.out.println("-------------------------------");
+
+		System.out.println(sessionDTO);
+
+		System.out.println("-------------------------------");
+
+		PayCheckDTO payCheckDTO = new PayCheckDTO();
+
+		payCheckDTO.setHotel_code(searchDTO.getHotel_code());
+
+		payCheckDTO.setRoom_code(room_code);
+
+		PayPageDTO payPageDTO = service.payPageProcess(payCheckDTO, searchDTO);
+
+		payPageDTO.setMem_code(sessionDTO.getMem_code());
+
+		model.addAttribute("payPage", payPageDTO);
+
+		model.addAttribute("searchDTO", searchDTO);
+
+		return "testMainPage/pay";
+	}
+
+	@PostMapping("/payment")
+	public String payMent(@ModelAttribute SearchDTO searchDTO, @ModelAttribute BookingDTO bookingDTO
+
+			, HttpServletResponse response) {
+
+		System.out.println(searchDTO);
+
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+		try {
+			bookingDTO.setCheckin(formatter.parse(searchDTO.getCheckin()));
+			bookingDTO.setCheckout(formatter.parse(searchDTO.getCheckout()));
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		System.out.println(bookingDTO);
+
+		int num = service.PaymentProcess(bookingDTO);
+
+		if (num == 1) {
+
+			try {
+				PrintWriter out = response.getWriter();
+				out.print("<script>alert('예약성공!!!!!');</script>");
+
+			} catch (IOException e) {
+				e.getMessage();
+				e.printStackTrace();
+			}
+
+		}
+
+		return "redirect:/check";
+	}
+
+}

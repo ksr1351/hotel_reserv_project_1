@@ -1,0 +1,181 @@
+.container {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  margin-top: 110px;
+}
+
+.container1 {
+  justify-content: center;
+  align-items: center;
+  margin-left: 700px;
+}
+
+.borad_num {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.board_box1 {
+  border: solid 0px #373737;
+  line-height: 30px;
+  pointer-events: none;
+  font-size:23px;
+}
+
+
+
+.title1 {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.test2 {
+  height: 25px;
+  width: 500px;
+  margin-bottom: 10px;
+  border-radius: 20px;
+      border: solid 2px #00B9FF;
+}
+
+
+.content1 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+#content3 {
+  width: 600px;
+  height: 400px;
+  margin-top: 10px;
+  border-radius: 10px;
+  border:solid 2px #00B9FF;
+}
+
+#font5 {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 25px;
+}
+
+.data_box {
+  border: solid 0px;
+}
+
+.data10 {
+  position: relative;
+  margin-left: -520px; 
+}
+
+.button1 {
+  margin-top: 20px;
+  margin-left: 250px;
+  
+}
+
+.update_btn{
+   border:solid 1px #aaa;
+}
+
+.delete_btn{
+   border:solid 1px #aaa;
+}
+
+.btn1 {
+  color: black;
+}
+
+
+.replyList {
+  left: 0;
+  border: solid 1px #aaa;
+  width: 500px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.replyList1 {
+  margin-left: 50px;
+}
+
+.reply2 {
+  margin-bottom: 10px;
+}
+
+.name5 {
+ border:solid 2px #00B9FF;
+  margin-bottom: 10px;
+}
+
+.re_text {
+  margin-top: 5px;
+  width: 400px;
+  height: 200px;
+  border-radius: 10px;
+  border:solid 2px #00B9FF;
+}
+
+.replyWriteBtn {
+    position: absolute;
+    right: 37%;
+    top: 107%;
+    border: solid 1px #aaa;
+}
+
+*/ footer {
+  border-top: 1px solid lightgray;
+  position: absolute;
+  padding-top: 30px;
+  width: 2114px;
+  margin: 0 auto;
+  top: 10;
+  bottom: 0;
+  left: 0;
+  background-color: whitesmoke;
+  height: 100px;
+  text-align: center;
+  color: #aaa;
+}
+
+.banner {
+   position: absolute;
+   top: 200px;
+   right: 370px;
+   width: 200px;
+   height: 600px;
+   background-color: #aaa;
+   list-style: none;
+   display: flex;
+}
+
+.text9 {
+   position: absolute;
+   color: #00B9FF;
+   writing-mode: vertical-lr;
+   top: 30%;
+   left: 20%;
+   font-size: 80px;
+   pointer-events: none;
+}
+
+
+
+.text9 {
+  animation: flux 2s linear infinite;
+  -moz-animation: flux 2s linear infinite;
+  -webkit-animation: flux 2s linear infinite;
+  -o-animation: flux 2s linear infinite;
+}
+
+@keyframes flux {
+  0%,
+  100% {
+    text-shadow: 0 0 1vw #1041FF, 0 0 3vw #1041FF, 0 0 10vw #1041FF, 0 0 10vw #1041FF, 0 0 .4vw #8BFDFE, .5vw .5vw .1vw #147280;
+    color: #28D7FE;
+  }
+  50% {
+    text-shadow: 0 0 .5vw #082180, 0 0 1.5vw #082180, 0 0 5vw #082180, 0 0 5vw #082180, 0 0 .2vw #082180, .5vw .5vw .1vw #0A3940;
+    color: #146C80;
+  }
+}

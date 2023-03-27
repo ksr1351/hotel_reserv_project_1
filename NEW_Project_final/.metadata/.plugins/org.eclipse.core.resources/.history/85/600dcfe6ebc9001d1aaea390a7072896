@@ -1,0 +1,291 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>Booking Form HTML Template</title>
+
+    <!-- Google font -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:400"
+      rel="stylesheet"
+    />
+    <link
+      href="https://webfontworld.github.io/goodchoice/Jalnan.css"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap -->
+    <link type="text/css" rel="stylesheet" href="/resources/testMainPage/css/bootstrap.min.css" />
+
+    <!-- Custom stlylesheet -->
+    <link type="text/css" rel="stylesheet" href="/resources/testMainPage/css/style.css" />
+    <link type="text/css" rel="stylesheet" href="/resources/testMainPage/css/pay.css" />
+  	
+  		<style type="text/css">
+ 		.button-class{
+		  border: 0;
+		  background-color: transparent;
+		  font-size:15px;
+		  color:white;
+		  font-family: "Jalnan";
+		}
+ 	</style>
+  	
+  </head>
+
+  <body>
+    <div id="booking" class="section">
+     <form action ="/logout" method="post">
+      <div class="header">
+        <h1><a href="/">거긴어때</a></h1>
+        <div class="nav">
+          <ul>
+          	<li><a href="/info">공지사항</a></li>
+            <li><a href="/room">숙실정보</a></li>
+            <li><a href="/check">예약내역</a></li>
+            <li><a href="/board">게시판</a></li>
+        
+           <c:choose>
+            	<c:when test="${sessionScope.loginMember == null && sessionScope.loginKakao == null && sessionScope.loginAdmin==null}">
+            		 <li><a href='/login'><span>로그인</span></a></li>
+            		  <li><a href='/login'><span>회원가입</span></a></li>
+            	</c:when>
+            	<c:when test="${sessionScope.loginKakao != null}">
+            		<li><a href="https://kauth.kakao.com/oauth/logout?client_id=fdb3ded4b5d753c2e685b7bb4ffbaa8d&logout_redirect_uri=http://localhost:8090/auth/kakao/logout">
+            		<span>${sessionScope.loginKakao.mem_Id}님 로그아웃</span>
+            		</a></li>
+            		<li><a href='/'><span>내 정보</span></a></li>
+            		<li><a href='/'><span>회원수정</span></a></li>
+            	</c:when>
+            	<c:when test="${sessionScope.loginAdmin != null}">
+            	<li><span><button type="submit" class = "button-class">${sessionScope.loginAdmin.mem_Id}(관리자)님 로그아웃</button></span></li>
+            	<li><a href='/management'><span>관리자 페이지</span></a></li>
+            	</c:when>
+            	<c:otherwise>
+            		<li><span><button type="submit" class = "button-class">${sessionScope.loginMember.mem_Id}님 로그아웃</button></span></li>
+            		<li><a href='/'><span>내 정보</span></a></li>
+            		<li><a href='/'><span>회원수정</span></a></li>
+            	</c:otherwise>
+            	
+            	
+            </c:choose>
+          </ul>
+        </div>
+      </div>
+	</form>
+	
+	<form action = "/payment" method="post">
+      <section>
+        <div class="right" data-v-33033856="" data-v-52175841="">
+          <section class="info" data-v-33033856="">
+            <img
+              src="https:${payPage.filepath}"
+              style="width: 480px; height: 300px"
+              alt="${payPage.filename}"
+            />
+            <p class="name" data-v-33033856="">
+              <strong data-v-33033856="">호텔이름</strong>${payPage.name}
+            </p>
+            <p data-v-33033856="">
+              <strong data-v-33033856="">객실타입/기간</strong>${payPage.room_name} / ${payPage.days} (박)
+            </p>
+            <p data-v-33033856="">
+              <strong data-v-33033856="">체크인 : </strong>
+              <fmt:formatDate value="${payPage.checkin}" pattern="yyyy-MM-dd"/>
+            </p>
+            <p data-v-33033856="">
+              <strong data-v-33033856="">체크아웃 : </strong>
+               <fmt:formatDate value="${payPage.checkout}" pattern="yyyy-MM-dd"/>
+            </p>
+          </section>
+          <section class="total_price_pc" data-v-33033856="">
+            <p data-v-33033856="">
+              <strong data-v-33033856=""
+                ><b data-v-33033856="">총 결제 금액</b>(VAT포함) : </strong
+              ><span class="in_price" data-v-33033856=""> ${payPage.totalPrice}</span>
+            </p>
+            <ul data-v-33033856="">
+              <li data-v-33033856="">
+                해당 객실가는 세금, 봉사료가 포함된 금액입니다
+              </li>
+              <li data-v-33033856="">
+                결제완료 후
+                <span data-v-33033856="">예약자 이름</span>
+                <span data-v-33033856="">체크인</span>
+              </li>
+            </ul>
+          </section>
+          
+          <input type="hidden" name = "mem_code" value="${payPage.mem_code}">
+          <input type="hidden" name = "hotel_code" value="${hotel.hotel_code}">
+          <input type="hidden" name = "_code" value="${payPage.mem_code}">
+          <input type="hidden" name = "mem_code" value="${payPage.mem_code}">
+          <input type="hidden" name = "mem_code" value="${payPage.mem_code}">
+          <input type="hidden" name = "mem_code" value="${payPage.mem_code}">
+          <button
+            type="submit"
+            class="btn_pay gra_left_right_red"
+            data-v-33033856="">
+            결제하기
+          </button>
+        </div>
+      
+        <div class="left">
+          <div class="guest">
+            <h3 class="rel_info">예약자 정보</h3>
+            <strong class="rel_name">예약자 이름</strong>
+          </div>
+          <p class="inp_size">
+            <input
+              type="text"
+              name="userName"
+              placeholder="     체크인시 필요한 정보입니다."
+              style="width: 500px"
+            />
+          </p>
+          <div>
+            <strong class="mt">휴대폰 번호</strong><br />
+            <span class="safety_txt"
+              >개인 정보 보호를 위해 안심번호로 숙소에 전송됩니다.</span
+            >
+          </div>
+          <div class="phonebox">
+            <input
+              type="tel"
+              name="userPhone"
+              placeholder="    체크인시 필요한 정보입니다."
+              style="width: 400px"
+              maxlength="13;"
+              class="input validation-requored-input"
+            />
+            <button type="button" class="btn_send">인증번호 전송</button>
+          </div>
+
+          <p data-show="tel" class="alert_txt">휴대폰 번호를 확인해 주세요.</p>
+
+          <section class="pay_select" data-v-52175841="">
+            <h3 class="pay1" style="" data-v-52175841="">결제수단 선택</h3>
+            <select
+              id="payment-select"
+              class="select_type_1"
+              data-v-52175841=""
+            >
+              <option data-minprice="0" value="KAKAO" data-v-52175841="">
+                카카오페이
+              </option>
+              <option data-minprice="0" value="TOSS" data-v-52175841="">
+                토스페이
+              </option>
+              <option
+                data-minprice="0"
+                selected="selected"
+                value="CARD"
+                data-v-52175841=""
+              >
+                신용/체크카드
+              </option>
+              <option data-minprice="0" value="NAVER" data-v-52175841="">
+                네이버페이
+              </option>
+              <option data-minprice="0" value="PAYCO" data-v-52175841="">
+                PAYCO
+              </option>
+              <option data-minprice="0" value="CARD_BIZ" data-v-52175841="">
+                법인카드
+              </option>
+              <option data-minprice="0" value="CELLPHONE" data-v-52175841="">
+                휴대폰결제
+              </option>
+            </select>
+            <!---->
+            <!---->
+          </section>
+
+          <section class="agree" data-v-d63b628c="" data-v-52175841="">
+            <p class="all_check" data-v-d63b628c="">
+              <label data-v-d63b628c=""
+                ><input
+                  type="checkbox"
+                  name="checkAll"
+                  class="inp_chk_02"
+                  data-v-d63b628c=""
+                />
+                <span data-v-d63b628c="">전체 동의</span></label
+              >
+            </p>
+            <p data-v-d63b628c="">
+              <input
+                type="checkbox"
+                name="checkOne"
+                class="inp_chk_02"
+                data-v-d63b628c=""
+              />
+              <span onclick="pop_agree_01();" data-v-d63b628c=""
+                ><i data-v-d63b628c="">숙소이용규칙 및 취소/환불규정 동의</i
+                ><b data-v-d63b628c=""> (필수)</b></span
+              >
+            </p>
+            <p data-v-d63b628c="">
+              <input
+                type="checkbox"
+                name="checkOne"
+                class="inp_chk_02"
+                data-v-d63b628c=""
+              />
+              <span onclick="pop_agree_02();" data-v-d63b628c=""
+                ><i data-v-d63b628c="">개인정보 수집 및 이용 동의</i
+                ><b data-v-d63b628c=""> (필수)</b></span
+              >
+            </p>
+            <p data-v-d63b628c="">
+              <input
+                type="checkbox"
+                name="checkOne"
+                class="inp_chk_02"
+                data-v-d63b628c=""
+              />
+              <span onclick="pop_agree_03();" data-v-d63b628c=""
+                ><i data-v-d63b628c="">개인정보 제 3자 제공 동의</i
+                ><b data-v-d63b628c=""> (필수)</b></span
+              >
+            </p>
+            <p class="guest_chk_area" data-v-d63b628c="">
+              <input
+                type="checkbox"
+                name="checkOne"
+                class="inp_chk_02"
+                data-v-d63b628c=""
+              />
+              <span onclick="pop_agree_04();" data-v-d63b628c=""
+                ><i data-v-d63b628c="">만 14세 이상 확인</i
+                ><b data-v-d63b628c=""> (필수)</b></span
+              >
+            </p>
+          </section>
+        </div>
+      </section>
+       </form>
+    </div>
+     
+  </body>
+
+  <div style="padding-top: 5%">
+    <footer>
+      <p>
+        거기어때컴퍼니는 통신판매중개자로서 통신판매의 당사자가 아니며, 상품의
+        예약, 이용 및 환불 등과 관련한 의무와 책임은 각 판매자에게 있습니다.
+      </p>
+      <address>
+        주소:서울특별시 강남구|대표이사:오이들|사업자등록번호:123-45-67894
+      </address>
+    </footer>
+  </div>
+</html>

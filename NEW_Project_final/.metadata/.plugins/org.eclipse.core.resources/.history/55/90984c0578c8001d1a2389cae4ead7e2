@@ -1,0 +1,89 @@
+.section {
+  position: relative;
+  text-align: center;
+  width: 0 auto;
+  height: 0 auto;
+  margin: 0 auto;
+  padding: 0 auto;
+}
+
+.right {
+  margin-top: 130px;
+  margin-left: 60%;
+  font-size: 20px;
+  line-height: 50px;
+  width: 500px;
+  background: #fafafa;
+}
+
+.left {
+  position: absolute;
+  left: 25%;
+  bottom: 10%;
+  line-height: 50px;
+  margin-top: 50px;
+}
+
+.rel_info {
+  margin-right: 300px;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.rel_name {
+  margin-right: 320px;
+}
+
+.inp_size {
+  width: 100%;
+  height: 50px;
+  font-size: 15px;
+  margin-left: 50px;
+}
+
+.mt {
+  margin-right: 320px;
+}
+
+.safety_txt {
+  margin-right: 60px;
+}
+
+.phonebox {
+  width: 100%;
+  margin-left: 50px;
+  font-size: 15px;
+}
+
+.btn_send {
+  margin-top: 20px;
+  font-size: 15px;
+}
+
+.alert_txt {
+  margin-right: 210px;
+  color: #ff0000;
+}
+
+.pay_select {
+  margin-top: 50px;
+}
+
+.pay1 {
+  font-weight: 700;
+}
+
+*/ footer {
+  border-top: 1px solid lightgray;
+  position: absolute;
+  padding-top: 30px;
+  width: 2114px;
+  margin: 0 auto;
+  top: 10;
+  bottom: 0;
+  left: 0;
+  background-color: whitesmoke;
+  height: 100px;
+  text-align: center;
+  color: #aaa;
+}

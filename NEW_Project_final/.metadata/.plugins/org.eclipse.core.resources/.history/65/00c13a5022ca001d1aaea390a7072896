@@ -1,0 +1,63 @@
+package testBoard.board.dto;
+
+import java.util.List;
+
+public class SearchDTO {
+	private String checkin;
+	private String checkout;
+	private int hotel_code;
+	
+	private String location;
+	
+	public SearchDTO() {
+	}
+	
+	public SearchDTO(String checkin, String checkout, int hotel_code) {
+		this.checkin = checkin;
+		this.checkout = checkout;
+		this.hotel_code = hotel_code;
+	}
+
+	public String getCheckin() {
+		return checkin;
+	}
+
+	public void setCheckin(String checkin) {
+		this.checkin = checkin;
+	}
+
+	public String getCheckout() {
+		return checkout;
+	}
+
+	public void setCheckout(String checkout) {
+		this.checkout = checkout;
+	}
+
+	public int getHotel_code() {
+		return hotel_code;
+	}
+
+	public void setHotel_code(int hotel_code) {
+		this.hotel_code = hotel_code;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	@Override
+	public String toString() {
+		return "SearchDTO [checkin=" + checkin + ", checkout=" + checkout + ", hotel_code=" + hotel_code + ", location="
+				+ location + "]";
+	}
+	
+	
+	
+	
+	
+}

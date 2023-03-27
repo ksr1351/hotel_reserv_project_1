@@ -1,0 +1,159 @@
+ /* .container {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  margin-top: 150px;
+}*/
+
+
+
+* {
+   list-style: none;
+   text-decoration: none;
+   padding: 0;
+   margin: 0;
+   box-sizing: border-box;
+}
+
+.updateView_detail_wrap {
+   justify-content: center;
+   align-items: center;
+   display: flex;
+   flex-direction: row;
+   margin-top: 100px;
+   margin-right: 325px;
+}
+
+.title {
+   margin-left: 450px;
+   font-size: 25px;
+   font-weight: 600;
+   font-family: jalnan;
+}
+
+.title_text {
+   width: 280px;
+   height: 20px;
+   margin-left: 340px;
+   margin-top: 20px;
+   border:solid 1px #00B9FF;
+   border-radius: 5px;
+}
+
+.content1 {
+   font-family: jalnan;
+   margin-left: 455px;
+   line-height: 80px;
+   font-size: 20px;
+   font-weight: 600;
+}
+
+.content2 {
+   width: 500px;
+   height: 400px;
+   left: 0;
+   margin-left: 235px;
+   margin-top: 10px;
+   border-radius: 5px;
+   border:solid 1px #00B9FF;
+}
+
+.writer {
+   margin-left: 350px;
+   line-height: 30px;
+   font-size: 15px;
+   font-weight: 600;
+}
+
+.write_box {
+   width: 150px;
+   height: 20px;
+   margin-left: 7px;
+   border: solid 2px white;
+}
+
+.write_data {
+   margin-left: 335px;
+   font-size: 15px;
+   font-weight: 600;
+}
+
+.data1 {
+   position: absolute;
+   margin-left: 335px;
+   margin-top: 5px;
+   font-size: 15px;
+}
+
+.file1 {
+   position: relative;
+   margin-left: 330px;
+   margin-top: 30px;
+   
+}
+
+.file2 {
+   position: absolute;
+left: 43.5%;
+    margin-top: 5px;
+   
+}
+
+.button1 {
+   margin-left: 435px;
+   margin-top: 10px;
+   
+}
+
+.update_btn{
+   border:solid 1px #aaa;   
+   width: 45px;
+    height: 30px;
+}
+
+.cancel_btn{
+   border:solid 1px #aaa;   
+   width: 45px;
+    height: 30px;
+}
+.banner {
+   position: absolute;
+   top: 200px;
+   right: 460px;
+   width: 200px;
+   height: 600px;
+   background-color: #aaa;
+   list-style: none;
+   display: flex;
+}
+
+.text9 {
+   position: absolute;
+   color: #00B9FF;
+   writing-mode: vertical-lr;
+   top: 30%;
+   left: 20%;
+   font-size: 80px;
+   pointer-events: none;
+}
+
+
+.text9 {
+  animation: flux 2s linear infinite;
+  -moz-animation: flux 2s linear infinite;
+  -webkit-animation: flux 2s linear infinite;
+  -o-animation: flux 2s linear infinite;
+}
+
+@keyframes flux {
+  0%,
+  100% {
+    text-shadow: 0 0 1vw #1041FF, 0 0 3vw #1041FF, 0 0 10vw #1041FF, 0 0 10vw #1041FF, 0 0 .4vw #8BFDFE, .5vw .5vw .1vw #147280;
+    color: #28D7FE;
+  }
+  50% {
+    text-shadow: 0 0 .5vw #082180, 0 0 1.5vw #082180, 0 0 5vw #082180, 0 0 5vw #082180, 0 0 .2vw #082180, .5vw .5vw .1vw #0A3940;
+    color: #146C80;
+  }
+}

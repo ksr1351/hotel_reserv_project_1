@@ -1,0 +1,40 @@
+function loadReviewList(hotel_code) {
+	$.ajax({
+        url: "/detail/getReviews?hotel_code=" + hotel_code,
+        type: "GET",
+        dataType: "json",
+        success: function (response) {
+            var reviewListHtml = '';
+            var reviewList = response.reviewList;
+            
+            if (reviewList.length === 0) {
+                reviewListHtml = '<p>작성된 리뷰가 없습니다!</p>';
+            } else {
+            	for (var i = 0; i < reviewList.length; i++) {
+                    var review = reviewList[i];
+                    reviewListHtml += '<div class= "container">';
+                    reviewListHtml += '<div class="review text-center">';
+                    reviewListHtml += '<h3>' + review.room_name + ' | ' + review.name + '</h3>';
+                    reviewListHtml += '<div class="content"><p>' + review.content + '</p></div>';
+                    reviewListHtml += '<div class="rating_value"><p>Rating: ' + review.rating_value + '</p></div>';
+                    reviewListHtml += '<div><img src="' + review.filepath + '" alt="' + review.filename + '" width="100" height="100" /></div>';
+                    reviewListHtml += '=========================';
+                    reviewListHtml += '<input class = "form-control" type="button" id="update" data-review-code="' + review.review_code + '"value="수정" />';
+                    reviewListHtml += '<input class = "form-control" type="button" id="delete" data-review-code="' + review.review_code + '"value="삭제" />';
+                    reviewListHtml += '<br/>';
+                    reviewListHtml += '</div>';
+                    reviewListHtml += '</div>';
+                }
+            	// update rating
+                var rating = response.rating;
+                $('#rating_avg_1').html('<p>평균 평점 : ' + rating.rating_avg + '</p>');
+                $('#rating_avg_2').html('<p>평균 평점 : ' + rating.rating_avg + '</p>');
+                $('#rating_cnt').html('<p>평점 개수 : ' + rating.rating_cnt + '</p>');
+            }
+            $('#reviewList').html(reviewListHtml); 
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            alert('Error: ' + textStatus);
+        }
+    });
+}

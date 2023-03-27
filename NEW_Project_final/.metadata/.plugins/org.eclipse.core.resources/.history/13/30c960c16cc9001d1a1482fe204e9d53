@@ -1,0 +1,110 @@
+package testBoard.board.dto;
+
+public class PayPageDTO {
+	
+	
+	private int room_code;
+	private int hotel_code;
+	
+	private String name;
+	private String room_name;
+	private String room_price;
+	
+	private String checkin;
+	private String checkout;
+	
+	private int days;
+	private int totalPrice;
+	
+	public PayPageDTO() {
+	
+	}
+
+	public PayPageDTO(int room_code, int hotel_code, String name, String room_name, String room_price, String checkin,
+			String checkout, int days, int totalPrice) {
+		this.room_code = room_code;
+		this.hotel_code = hotel_code;
+		this.name = name;
+		this.room_name = room_name;
+		this.room_price = room_price;
+		this.checkin = checkin;
+		this.checkout = checkout;
+		this.days = days;
+		this.totalPrice = totalPrice;
+	}
+
+	public int getRoom_code() {
+		return room_code;
+	}
+
+	public void setRoom_code(int room_code) {
+		this.room_code = room_code;
+	}
+
+	public int getHotel_code() {
+		return hotel_code;
+	}
+
+	public void setHotel_code(int hotel_code) {
+		this.hotel_code = hotel_code;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getRoom_name() {
+		return room_name;
+	}
+
+	public void setRoom_name(String room_name) {
+		this.room_name = room_name;
+	}
+
+	public String getRoom_price() {
+		return room_price;
+	}
+
+	public void setRoom_price(String room_price) {
+		this.room_price = room_price;
+	}
+
+	public String getCheckin() {
+		return checkin;
+	}
+
+	public void setCheckin(String checkin) {
+		this.checkin = checkin;
+	}
+
+	public String getCheckout() {
+		return checkout;
+	}
+
+	public void setCheckout(String checkout) {
+		this.checkout = checkout;
+	}
+
+	public int getDays() {
+		return days;
+	}
+
+	public void setDays(int days) {
+		this.days = days;
+	}
+
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+	
+	
+	
+}

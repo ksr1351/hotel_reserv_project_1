@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="craw">
+
+	<insert id="hotel" parameterType="webCrawlig.dto.Hotel_banner_InfoDTO" >
+	
+		INSERT INTO hotel_banner_info(hotel_code, name, type, address, price)
+    	
+    	VALUES (
+    	
+    		hotel_code_seq.nextval,
+    		#{name},
+    		#{type},
+    		#{address},
+    		#{price}
+    		)
+		
+	</insert> 
+
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 사진 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+	
+	<insert id="hotelImages" parameterType="webCrawlig.dto.Hotel_ImagesDTO">
+		INSERT INTO hotel_main_images(hotel_code, filename, filepath) 
+		VALUES(
+		
+			hotel_Images_seq.nextval,
+			#{filename},
+			#{filepath}
+		
+		)
+	
+	</insert>
+	
+	<insert id="hotelSubImages" parameterType="webCrawlig.dto.Hotel_ImagesDTO">
+	
+	INSERT INTO hotel_sub_images(hotel_code, filename, filepath) 
+		VALUES(
+		
+			#{hotel_code},
+			#{filename},
+			#{filepath}
+		
+		)
+	
+	
+	
+	</insert>
+	
+	
+	<insert id="roomImages" parameterType="webCrawlig.dto.Room_ImagesDTO">
+		
+	 	<![CDATA[
+	 	
+	 		INSERT INTO room_main_images(hotel_code, room_code, filename, filepath)
+	 		VALUES (
+	 			#{hotel_code},
+	 			#{room_code},
+	 			#{filename},
+	 			#{filepath}
+	 		)
+	 		
+	 	]]>
+	
+	</insert>
+	
+	
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+	
+	<insert id = "RoomDetailInfo" parameterType="webCrawlig.dto.RoomDTO">
+		<![CDATA[
+		
+			INSERT INTO room_detail(hotel_code, info, detail_info)
+			VALUES(
+				
+				#{hotel_code},
+				#{info},
+				#{detail_info}
+			
+			
+			)
+		
+		
+		]]>
+		
+	
+	</insert>
+	
+	
+	<insert id = "RoomBannerInfo" parameterType="webCrawlig.dto.Room_banner_InfoDTO">
+	
+		<![CDATA[
+		
+			INSERT INTO room_banner_info(
+				
+				hotel_code,
+				room_code, 
+				room_name,
+				room_price,
+				room_member,
+				room_width,
+				room_bed
+			)
+			VALUES(
+				
+				#{hotel_code},
+				room_code_seq.nextval,
+				#{room_name},
+				#{room_price},
+				#{room_member, jdbcType=VARCHAR},
+				#{room_width, jdbcType=VARCHAR},
+				#{room_bed, jdbcType=VARCHAR}
+			
+			)
+		
+		]]>
+	
+	</insert>
+	
+	<insert id = "hotel_detail_address" parameterType="webCrawlig.dto.Hotel_Detail_AddressDTO">
+		
+		<![CDATA[
+			
+			INSERT INTO hotel_detail_address(hotel_code, hotel_detail_address)
+			VALUES(
+			 #{hotel_code},
+			 #{hotel_detail_address}
+			)
+		
+		]]>
+		
+	</insert>
+	
+	
+	<insert id = "hotel_conven" parameterType="webCrawlig.dto.Hotel_convenienceDTO">
+		
+		<![CDATA[
+			
+			INSERT INTO hotel_detail_con(hotel_code, hotel_detail_con)
+			VALUES(
+			 #{hotel_code},
+			 #{hotel_detail_con}
+			)
+		
+		]]>
+		
+	</insert>
+	
+
+</mapper>
+    
+    
+    

@@ -1,0 +1,111 @@
+package testBoard.login.service;
+
+
+import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import testBoard.board.dto.SearchDTO;
+import testBoard.login.dao.MembersDAO;
+import testBoard.login.dto.AddMemDTO;
+import testBoard.login.dto.LoginMemDTO;
+import testBoard.login.dto.SessionDTO;
+
+
+@Service
+public class MembersServiceImp implements MembersService{
+
+	private final MembersDAO dao;
+	
+	@Autowired
+	public MembersServiceImp(MembersDAO dao) {
+		this.dao = dao;
+	}
+
+
+	@Override
+	public int insertProcess(AddMemDTO addMemDTO) {
+		return dao.insertMathod(addMemDTO);
+	}
+
+	//로그인 아이디, 비밀번호 확인
+	@Override
+	public LoginMemDTO SelectMemberCheckProcess(LoginMemDTO loginMemDTO) {
+	
+		LoginMemDTO mem = dao.SelectMemberCheckMathod(loginMemDTO);
+		
+		if(mem!=null) {
+			if(loginMemDTO.getMem_Pwd().equals(mem.getMem_Pwd())) {
+				return mem;
+			}
+		}
+		
+		
+		return null;
+	}
+	
+	
+	
+	
+	
+
+	@Override
+	public int duplicateIdCheckProcess(String id) {
+		
+		return dao.duplicateIdCheckMeathod(id);
+	}
+
+
+	@Override
+	public SessionDTO kakaoMemberCheckProcess(String id) {
+	
+		return dao.kakaoMemberCheckMathod(id);
+	}
+
+
+	private String calculatorMethod(SearchDTO searchDTO, String price) {
+		
+		
+		
+		
+		
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		
+		String date = "";
+		
+		try {
+			
+			
+		Date d1	= format.parse(searchDTO.getCheckin());
+		Date d2 = format.parse(searchDTO.getCheckout());
+		
+		
+		long Days = ((d2.getTime()-d1.getTime() )/(3600000*24));
+		
+	
+		long num = Integer.parseInt(price.substring(0,price.length()-1).replace(",", ""));
+		
+		long payPrice = (num*Days);
+		
+		System.out.println(payPrice);
+		
+		DecimalFormat formatter = new DecimalFormat("###,###원");
+		
+		date =formatter.format(payPrice);
+		
+		}catch (ParseException e) {
+			e.getMessage();
+			e.printStackTrace();
+		}
+		
+		
+		return date;
+	}
+	
+	
+}

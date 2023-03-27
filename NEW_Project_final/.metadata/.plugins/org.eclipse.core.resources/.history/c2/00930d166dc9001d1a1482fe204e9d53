@@ -1,0 +1,8 @@
+package testBoard.board.dto;
+
+public class PayCheckDTO {
+		
+	private int room_code;
+	private int 
+	
+}

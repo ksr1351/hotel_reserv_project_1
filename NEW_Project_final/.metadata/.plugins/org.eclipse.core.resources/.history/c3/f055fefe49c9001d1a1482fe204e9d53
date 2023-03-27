@@ -1,0 +1,55 @@
+package testBoard.board.dto;
+
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+public class managementDTO {
+
+	private int booking_code;
+	private String name;
+	private String room_name;
+	private String mem_Phone; 
+	private String mem_Name;
+	private String room_price;
+	
+	private int days;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date regdate;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date checkin;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date checkout;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date canceldate;
+	
+	public managementDTO() {
+	}
+
+	public managementDTO(int booking_code, String name, String room_name, String mem_Phone, String mem_Name,
+			String room_price, int days, Date regdate, Date checkin, Date checkout, Date canceldate) {
+		this.booking_code = booking_code;
+		this.name = name;
+		this.room_name = room_name;
+		this.mem_Phone = mem_Phone;
+		this.mem_Name = mem_Name;
+		this.room_price = room_price;
+		this.days = days;
+		this.regdate = regdate;
+		this.checkin = checkin;
+		this.checkout = checkout;
+		this.canceldate = canceldate;
+	}
+
+	
+
+	
+	
+	
+	
+	
+}

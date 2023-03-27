@@ -1,0 +1,19 @@
+package testBoard.board.dto;
+
+public class IndexBannerDTO {
+ 
+	private int hotel_code;
+	private String filename;
+	private String filepath;
+	private double rating_avg;
+	private String name;
+	private String address;
+	
+	public IndexBannerDTO() {
+	}
+
+	
+	
+	
+	
+}

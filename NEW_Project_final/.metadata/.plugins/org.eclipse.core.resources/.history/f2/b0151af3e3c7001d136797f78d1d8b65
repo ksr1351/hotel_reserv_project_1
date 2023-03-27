@@ -1,0 +1,50 @@
+package testBoard.login.dto;
+
+public class SessionDTO {
+	
+	private String mem_Id;
+	private String mem_Name;
+	
+	
+	public SessionDTO() {
+	}
+
+
+	public SessionDTO(String mem_Id, String mem_Name) {
+		this.mem_Id = mem_Id;
+		this.mem_Name = mem_Name;
+	}
+
+
+	public String getMem_Id() {
+		return mem_Id;
+	}
+
+
+	public void setMem_Id(String mem_Id) {
+		this.mem_Id = mem_Id;
+	}
+
+
+	public String getMem_Name() {
+		return mem_Name;
+	}
+
+
+	public void setMem_Name(String mem_Name) {
+		this.mem_Name = mem_Name;
+	}
+
+
+	@Override
+	public String toString() {
+		return "SessionDTO [mem_Id=" + mem_Id + ", mem_Name=" + mem_Name + "]";
+	}
+	
+	
+	
+	
+	
+	
+	
+}

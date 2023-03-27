@@ -1,0 +1,9 @@
+package testBoard.board.dto;
+
+public class CheckDTO {
+
+	private int booking_code;
+	private String room_name;
+	 
+	
+}

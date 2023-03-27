@@ -1,0 +1,98 @@
+package testBoard.payment.Controller;
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller
+public class PaymentController {
+
+	
+	@GetMapping("/pay/payment")
+	public String execute() {
+		
+		return "payment/payMent";
+		
+	}
+	
+	@ResponseBody
+	@GetMapping("/pay/kakaopay")
+	public String execute2() {
+			System.out.println("컨트롤러 호출");
+		try {
+			URL address = new URL("https://kapi.kakao.com/v1/payment/ready");
+			try {
+				HttpURLConnection con = (HttpURLConnection)address.openConnection();
+				con.setRequestMethod("POST");
+				con.setRequestProperty("Authorization", "KakaoAK dae56277e5f51d81b6f0c18eca0ff47e");
+				con.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+				con.setDoOutput(true);
+				
+				String param = "cid=TC0ONETIME&partner_order_id=partner_order_id"
+						+ "&partner_user_id=partner_user_id&item_name=호텔"
+						+ "&quantity=1&total_amount=2200&vat_amount=200&tax_free_amount=0"
+						+ "&approval_url=http://localhost:8090/kakaoPayment/success"
+						+ "&cancel_url=http://localhost:8090/"
+						+ "&fail_url=http://localhost:8090/";
+				
+				OutputStream os = con.getOutputStream();
+				
+				DataOutputStream dos = new DataOutputStream(os);
+				
+				dos.writeBytes(param);
+				
+				//dos.flush();
+				dos.close();
+				
+				int result = con.getResponseCode();
+				
+				System.out.println(result);
+				
+				InputStream is;
+				if(result ==200) {
+					
+					is = con.getInputStream();
+					
+				}else {
+					is = con.getErrorStream();
+				}
+				
+				InputStreamReader reader = new InputStreamReader(is);
+				BufferedReader brd = new BufferedReader(reader);
+				
+				System.out.println(brd.readLine());
+				
+				return brd.readLine(); 
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		return "{\"result\":\"NO\"}";
+	}
+	
+	
+//	@GetMapping("/kakaoPayment/success")
+//	public String paySuccess() {
+//		
+//		
+//		return "";
+//		
+//	}
+	
+}

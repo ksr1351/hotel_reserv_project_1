@@ -1,0 +1,321 @@
+.header {
+  padding: 0 40px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: whitesmoke;
+  background-color: #00B9FF;
+}
+
+.header h1 a {
+  text-decoration: none;
+  color: whitesmoke;
+  font-family: "Jalnan";
+  font-size: 20px;
+  padding-left: 350px;
+  display: grid;
+  margin-bottom: 10px;
+}
+
+.nav {
+  font-family: "Jalnan";
+  font-weight: 100;
+}
+
+.nav ul {
+  font-size: 3em;
+  margin-right: 350px;
+}
+
+.nav ul li {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.nav ul li a {
+  display: grid;
+  margin-top: 10px;
+  text-decoration: none;
+  color: whitesmoke;
+  font-size: 15px;
+}
+
+.section {
+  position: relative;
+  height: 100vh;
+}
+
+.section .section-center {
+  padding-top: 120px;
+}
+
+#booking {
+  font-family: "Poppins", sans-serif;
+}
+
+.booking-form {
+  background: #fff;
+  border-radius: 2px;
+  margin-bottom: 100px;
+}
+
+.booking-form > form .row.no-margin {
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+.booking-form > form .row.no-margin > [class*="col-"] {
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
+.booking-form .form-group {
+  position: relative;
+  padding: 25px;
+  margin-bottom: 0px;
+}
+
+.booking-form .form-group:after {
+  content: "";
+  background: rgba(129, 131, 144, 0.15);
+  position: absolute;
+  top: 25px;
+  bottom: 0;
+  right: 0px;
+  width: 2px;
+  height: 75px;
+}
+
+.booking-form .form-control {
+  background-color: transparent;
+  border-radius: 0px;
+  border: none;
+  height: 50px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  font-size: 20px;
+  color: #222;
+  font-weight: 400;
+  padding: 0;
+}
+
+.booking-form .form-control::-webkit-input-placeholder {
+  color: #818390;
+}
+
+.booking-form .form-control:-ms-input-placeholder {
+  color: #818390;
+}
+
+.booking-form .form-control::placeholder {
+  color: #818390;
+}
+
+.booking-form input[type="date"].form-control:invalid {
+  color: #818390;
+}
+
+.booking-form select.form-control {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.booking-form select.form-control + .select-arrow {
+  position: absolute;
+  right: 0px;
+  bottom: 30px;
+  width: 32px;
+  line-height: 32px;
+  height: 32px;
+  text-align: center;
+  pointer-events: none;
+  color: #00B9FF;
+  font-size: 14px;
+}
+
+.booking-form select.form-control + .select-arrow:after {
+  content: "\279C";
+  display: block;
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+.booking-form .form-label {
+  color: #00B9FF;
+  display: block;
+  font-weight: 400;
+  height: 25px;
+  line-height: 25px;
+  font-size: 14px;
+}
+
+.booking-form .form-btn {
+  padding: 25px;
+}
+
+.booking-form .submit-btn {
+  background: #00B9FF;
+  border: none;
+  text-transform: capitalize;
+  display: block;
+  border-radius: 2px;
+  width: 100%;
+  height: 75px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff;
+}
+
+footer {
+  border-top: 1px solid lightgray;
+  padding: 20px;
+  width: 100%;
+  margin: 0 auto;
+  bottom: 0;
+  left: 0;
+  background-color: whitesmoke;
+  height: 100px;
+  text-align: center;
+  color: #aaa;
+}
+
+.place-title {
+  font-family: "Jalnan";
+  letter-spacing: 2px;
+  font-size: 20px;
+  font-weight: 1px;
+  margin-bottom: 20px;
+  color:#00B9FF;
+}
+
+#board_wrap {
+  background-color: #ddd;
+}
+
+#board_wrap > div {
+  width: 100%;
+  min-width: 1000px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.board {
+  width: 1150px;
+  background: #fff;
+}
+
+.board .title {
+  position: relative;
+  padding: 20px;
+  border-bottom: 1px solid #aaa;
+}
+
+.board .title .name {
+  font-family: "Jalnan";
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color:#00B9FF;
+}
+
+.board .title .more {
+  position: absolute;
+  top: 24px;
+  right: 20px;
+}
+
+.board .list {
+  padding: 20px;
+}
+
+.board .list ul li {
+  margin-top: 10px;
+  font-size: 0;
+}
+
+.board .list ul li:first-child {
+  margin-top: 0;
+}
+
+.board .list a,
+.board .list span {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.board .list a {
+  width: 80%;
+  font-size: 14px;
+}
+
+.board .list span {
+  width: 20%;
+  text-align: right;
+  font-size: 12px;
+  color: #777;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+.slide_wrapper {
+  position: relative;
+  width: 960px;
+  margin: 0 auto;
+  height: 300px;
+  overflow: hidden;
+}
+
+.slides {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: left 0.5s ease-out;
+}
+
+.slides li:not(:last-child) {
+  float: left;
+  margin-right: 30px;
+}
+
+.controls {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.controls span {
+  background: #333;
+  color: #fff;
+  padding: 10px 20px;
+  margin: 0 10px;
+}
+
+.listbox {
+  position: relative;
+  text-align: center;
+}
+
+.text45 {
+  position: absolute;
+  top: 10%;
+  left: 40%;
+  background-color: #aaa;
+}
+
+.text46 {
+  position: absolute;
+  top: 20%;
+  left: 40%;
+   background-color: #aaa;
+}

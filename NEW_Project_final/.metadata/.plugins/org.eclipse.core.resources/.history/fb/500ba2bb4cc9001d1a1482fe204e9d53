@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="#">	
+    <title>Booking Form HTML Template</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+   <!-- Google font -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:400"
+      rel="stylesheet"
+    />
+    <link href="https://webfontworld.github.io/goodchoice/Jalnan.css" rel="stylesheet">
+
+
+    <!-- Bootstrap -->
+    <link type="text/css" rel="stylesheet" href="/resources/testMainPage/css/bootstrap.min.css" />
+
+    <script src="/resources/testMainPage/js/login.js"></script>
+
+    <!-- Custom stlylesheet -->
+    <link type="text/css" rel="stylesheet" href="/resources/testMainPage/css/login.css" />
+    
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Gothic+A1:wght@700&family=Nanum+Pen+Script&display=swap");
+    
+    .field-error {
+ 	border-color: #dc3545;
+ 	color: #dc3545;
+ 	}
+    </style>
+    
+  </head>
+  <body>
+    <div id="booking" class="section">
+      <div class="header">
+        <h1><a href="/">거긴어때</a></h1>
+        <div class="nav">
+          <ul>
+          	<li><a href="/info">공지사항</a></li>
+            <li><a href="/room">호텔정보</a></li>
+            <li><a href="/check">예약내역</a></li>
+            <li><a href="/board">게시판</a></li>
+          </ul>
+        </div>
+      </div>
+	</div>
+	
+      <div class="cont">
+        <div class="form sign-in">
+          <h2>거긴어때</h2>
+          <form action= "" th:action="@{/login/apply}" th:object="${loginMemDTO}" method="post">
+      		
+      		<div th:if = "${#fields.hasGlobalErrors()}">
+				<p class = "field-error" th:each="err : ${#fields.globalErrors()}"
+				th:text="${err}">전체 오류 메세지</p>
+			
+			</div>
+          	
+          	<div>
+	          <label for="loginId">
+	            <span>로그인 ID</span>
+	       		 <input type="text" id="loginId" th:field="*{mem_Id}" 
+	            th:errorclass="field-error"/>
+	          </label>
+              
+	          <div class = "field-error" th:errors="*{mem_Id}"></div>
+	         </div> 
+	          
+	          
+	          <div>
+          	    <label for = "password">
+	            	<span>Password</span>
+	            	<input type="password" id="password" th:field="*{mem_Pwd}"
+	            	th:errorclass="field_error"/>
+	          	</label>
+	          
+	          	<div class= "field-error" th:errors="*{mem_Pwd}"></div>
+	          
+	           </div>
+	           
+	          <!--  <p class="forgot-pass">Forgot password?</p> -->
+	          <button type="submit" class="submit">로그인</button>
+	         
+	          
+          </form>
+	      
+	          <button type="button" class="fb-btn">비밀번호 찾기</button>
+	          <div class="text-center">
+	          	<a href="https://kauth.kakao.com/oauth/authorize?client_id=fdb3ded4b5d753c2e685b7bb4ffbaa8d&redirect_uri=http://localhost:8090/auth/kakao/callback&response_type=code"><img src="/resources/imagesKakao/kakao_login_button.png"/></a>
+	          </div>
+         
+         </div> 
+        
+        <div class="sub-cont">
+        
+          <div class="img">
+          
+	            <div class="img__text m--up">
+	              <h2>New here?</h2>
+	              <p>Sign up and discover great amount of new opportunities!</p>
+	            </div>
+            <a href="/login/member">
+	              <div class="img__btn">
+	                <span class="m--up">회원가입</span>
+	              </div>
+            </a>
+            
+          </div>
+          
+        </div>
+        
+      </div>
+      
+   
+   
+  </body>
+  
+   <div style="padding-top:20%;">
+  	<footer>
+        <p>
+          거기어때컴퍼니는 통신판매중개자로서 통신판매의 당사자가 아니며, 상품의
+          예약, 이용 및 환불 등과 관련한 의무와 책임은 각 판매자에게 있습니다.
+        </p>
+        <address>
+          주소:서울특별시 강남구|대표이사:오이들|사업자등록번호:123-45-67894
+        </address>
+      </footer>
+	</div>
+		
+</html>

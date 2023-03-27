@@ -1,0 +1,14 @@
+package testBoard.board.dto;
+
+import java.util.List;
+
+public class HotelSearchDTO {
+
+	private List<String> type;
+	private List<String> bedType;
+	private List<String> filter;
+	
+	private String location
+	
+			
+}

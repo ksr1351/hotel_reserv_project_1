@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+  <mapper namespace="admin">
+
+	<resultMap id = "managementList" type = "testBoard.board.dto.managementDTO">
+		
+		<id property="booking_code" column="booking_code"/>
+		<result property="name" column="name"/>
+		<result property="room_name" column="room_name"/>
+		<result property="mem_Phone" column="mem_Phone"/>
+		<result property="mem_Name" column="mem_Name"/>
+		<result property="regdate" column="regdate"/>
+		<result property="checkin" column="checkin"/>
+		<result property="checkout" column="checkout"/>
+		<result property="canceldate" column="canceldate"/>
+		
+	</resultMap>
+	
+	<select id = "management" resultMap="managementList">
+		SELECT a.booking_code, b.name,c.room_name, d.mem_Phone, d.mem_Name,
+		TO_CHAR(a.regdate,'yyyy-mm-dd'), 
+		TO_CHAR(a.checkin,'yyyy-mm-dd'), 
+		TO_CHAR(a.checkout,'yyyy-mm-dd'), 
+		TO_CHAR(a.canceldate,'yyyy-mm-dd')
+		FROM booking a 
+		JOIN hotel_banner_info b ON a.hotel_code = b.hotel_code
+		JOIN room_banner_info c ON a.room_code = c.room_code
+		JOIN customer d ON a.mem_code = d.mem_code
+
+	</select>
+
+	
+
+
+</mapper>

@@ -1,0 +1,150 @@
+package kakaoLogin.controller;
+
+import java.io.IOException;
+
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.ClientHttpResponse;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.stereotype.Controller;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.DefaultResponseErrorHandler;
+import org.springframework.web.client.RestTemplate;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import kakaoLogin.dto.KakaoProfileDTO;
+import kakaoLogin.dto.OAuthTokenDTO;
+
+// http://localhost:8090/kakao
+
+@Controller
+public class KakaoController {
+		
+	@GetMapping("/kakao")
+	public String execute() {
+		
+		return "kakaoLogin/kakao.html";
+	}
+	
+	
+	@GetMapping("/auth/kakao/callback")
+	public String KakaoCallback(String code) {
+		
+		 RestTemplate rt = new RestTemplate();
+
+		 
+		 HttpHeaders headers = new HttpHeaders();
+		 
+		 headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+		                                         
+		 
+		 //body
+		 MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+		 
+		 params.add("grant_type", "authorization_code");
+		 params.add("client_id","fdb3ded4b5d753c2e685b7bb4ffbaa8d");
+		 params.add("redirect_uri","http://localhost:8090/auth/kakao/callback");
+		 params.add("code",code );
+		 //params.add("client_secret","I3fuqXbPs3OF7X1QIjv9CyRUnrAG4p2i");
+		 
+		 
+		 HttpEntity<MultiValueMap<String, String>> kakaoTokenRequest =
+				 new HttpEntity<>(params,headers);
+		
+		 ResponseEntity<String> response = rt.exchange(
+				 
+				 "https://kauth.kakao.com/oauth/token",
+				 HttpMethod.POST,
+				 kakaoTokenRequest,
+				 String.class
+				 
+				 );
+		 
+		 //Gson, Tson Simple, ObjectMapper
+		 ObjectMapper objectMapper = new ObjectMapper();
+		 OAuthTokenDTO oauthToken = null;
+		 
+		 try {
+			oauthToken = objectMapper
+					 	.readValue(response.getBody(), OAuthTokenDTO.class);
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		  
+		System.out.println("카카오 엑세스 토큰 : " + oauthToken.getAccess_token());
+		 
+		/////////////////////////////////////////////////////////////////////////////////////////
+		
+		
+		
+		RestTemplate rt2 = new RestTemplate();
+
+		 
+		 HttpHeaders headers2 = new HttpHeaders();
+		 
+		 //공백 주의
+		 headers2.add("Authorization", "Bearer "+ oauthToken.getAccess_token());
+		 
+		 headers2.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+		                                         
+		 
+		 
+		 
+		 HttpEntity<MultiValueMap<String, String>> kakaoProfileRequest2 =
+				 new HttpEntity<>(headers2);
+		
+		 ResponseEntity<String> response2 = rt2.exchange(
+				 
+				 "https://kapi.kakao.com/v2/user/me",
+				 HttpMethod.POST,
+				 kakaoProfileRequest2,
+				 String.class
+				 
+				 );
+		 
+		 
+		 ObjectMapper objectMapper2 = new ObjectMapper();
+		 KakaoProfileDTO kakaoProfile = null;
+		 
+		 try {
+			 kakaoProfile = objectMapper2
+					 	.readValue(response2.getBody(), KakaoProfileDTO.class);
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		
+		
+		 System.out.println("카카오 아이디(번호) : " + kakaoProfile.getId());
+		 System.out.println("카카오 아이디(번호) : " + kakaoProfile.getKakao_account().getEmail());
+		
+		 
+		 
+		 
+		return "redirect:/kakaoLogout"; 
+	}	       
+	
+	@GetMapping("/kakaoLogout")
+	public String kakaoLogout() {
+		
+		return "kakaoLogin/kakaoLogout.html";
+	}
+	
+	
+	
+	
+	
+}

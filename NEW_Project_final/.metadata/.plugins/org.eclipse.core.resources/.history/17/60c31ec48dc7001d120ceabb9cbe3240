@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src='./manager.js'></script>
+  <link rel="stylesheet" href="./manager.css" type="text/css">
+    <title>거기어떄 관리자페이지</title>
+    <link rel="stylesheet" href="admin-style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>거기어때 관리자</h1>
+      
+    </header>
+    <nav>
+      <ul>
+        <li><a href="#" data-url="./home.html" class="link"><strong>HOME</strong></a></li>
+        <li><a href="#" data-url="../관리자페이지,게시물,글쓰기/reservation.html" class="link"><strong>예약관리</strong></a></li>
+        <li><a href="#" data-url="../공지사항/announcement.html" class="link"><strong>공지사항</strong></a></li>
+        <li><a href="#" data-url="./membership.html" class="link"><strong>Login</strong></a></li>
+      </ul>
+    </nav>
+    <main>
+      <iframe id="inlineFrame"
+    title="Inline Frame Example"
+    width="100%"
+    height="800"
+    src="./home.html">
+      <!-- <h2>Welcome to the Admin Dashboard</h2>
+      <p>Here you can manage all aspects of your website.</p> -->
+    </main>
+    <footer>
+      <p>&copy; 2023 My 오이들</p>
+    </footer>
+    <script src="admin-script.js"></script>
+  </body>
+</html>

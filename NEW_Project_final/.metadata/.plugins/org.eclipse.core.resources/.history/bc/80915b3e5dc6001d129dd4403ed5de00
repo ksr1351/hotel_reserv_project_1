@@ -1,0 +1,48 @@
+package testBoard.board.dto;
+
+import java.util.Objects;
+
+public class Hotel_infoDTO {
+
+	private String info;
+	
+	public Hotel_infoDTO() {
+	}
+
+	public Hotel_infoDTO(String info) {
+		this.info = info;
+	}
+
+	public String getInfo() {
+		return info;
+	}
+
+	public void setInfo(String info) {
+		this.info = info;
+	}
+
+	
+	
+	
+	@Override
+	public int hashCode() {
+		
+		return Objects.hash(info);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		return super.equals(obj);
+	}
+
+	@Override
+	public String toString() {
+		return "Hotel_infoDTO [info=" + info + "]";
+	}
+	
+	
+	
+	
+	
+}

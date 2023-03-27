@@ -1,0 +1,48 @@
+package testBoard.board.controller;
+
+import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class test {
+	
+	
+	public static void main(String[] args) throws ParseException {
+		
+		String data1 = "2023-04-01";
+		
+		String data2 = "2023-04-05";
+		
+		String price = "150,000원";
+		
+		
+		
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		
+		Date d1 = format.parse(data1);
+		
+		Date d2 = format.parse(data2);
+		
+		
+		long Days = ((d2.getTime()-d1.getTime() )/(3600000*24));
+		
+	
+		long num = Integer.parseInt(price.substring(0,price.length()-1).replace(",", ""));
+		
+		long payPrice = (num*Days);
+		
+		System.out.println(payPrice);
+		
+		
+		DecimalFormat formatter = new DecimalFormat("###,###원");
+	
+		
+		System.out.println(formatter.format(payPrice));
+		
+	}
+	
+	
+	
+}

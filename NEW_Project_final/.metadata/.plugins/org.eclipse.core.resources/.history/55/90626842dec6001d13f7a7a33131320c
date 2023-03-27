@@ -1,0 +1,48 @@
+
+
+
+
+		$.ajax({
+			url : '/members/idCheck',
+			type : 'post',
+			data : {
+				mem_Id : mem_Id
+			},
+			success : 
+$(function(int) {
+  const slides = document.querySelector('.slides'); //전체 슬라이드 컨테이너
+const slideImg = document.querySelectorAll('.slides li'); //모든 슬라이드들
+let currentIdx = 0; //현재 슬라이드 index
+const slideCount = slideImg.length; // 슬라이드 개수
+
+const prev;
+const next;
+
+for(let i=0; i<int; i++){
+
+prev = document.querySelector('.prev+{i}'); //이전 버튼
+next = document.querySelector('.next+{i}'); //다음 버튼
+
+}
+
+
+
+
+prev.addEventListener('click', function () {
+  /*첫 번째 슬라이드로 표시 됐을때는 
+  이전 버튼 눌러도 아무런 반응 없게 하기 위해 
+  currentIdx !==0일때만 moveSlide 함수 불러옴 */
+
+  if (currentIdx !== 0) moveSlide(currentIdx - 1);
+});
+
+
+
+
+
+
+
+
+
+const slideWidth = 490; //한개의 슬라이드 넓이
+const slideMargin = 10; //슬라이드간의 margin 값

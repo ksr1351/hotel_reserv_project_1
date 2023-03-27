@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+
+	
+	
+	<!-- 파일 첨부 // id 정해져있음 반드시 이거 써야됌 -->
+
+
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="1000000000" />
+		<property name="defaultEncoding" value="utf-8" />
+	</bean>
+
+
+	<!--spring - thymeleaf 기본설정 시작 -->
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean
+				class="org.springframework.http.converter.StringHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/html; charset=UTF-8</value>
+						<value>application/json;charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+
+
+	<!-- login annotation Resolver <mvc:annotation-driven> <mvc:argument-resolvers> 
+		<bean class="servlet.web.argumentresolver.LoginMemberArgumentResolver"></bean> 
+		</mvc:argument-resolvers> </mvc:annotation-driven> -->
+
+
+	 <!-- <mvc:interceptors> 
+		<mvc:interceptor> 
+			<mvc:mapping path="/**"/> 
+			<mvc:exclude-mapping path="/"/>
+			<mvc:exclude-mapping path="/login/**"/>
+			<mvc:exclude-mapping path="/login/*/*"/>
+			<mvc:exclude-mapping path="/logout"/>
+			<mvc:exclude-mapping path="/members/add"/>
+			<mvc:exclude-mapping path="/members/idCheck"/>
+			<mvc:exclude-mapping path="/resources/css/**"/>
+			<mvc:exclude-mapping path="/*.ico"/>
+			<mvc:exclude-mapping path="/*.js"/>
+			<mvc:exclude-mapping path="/*.css"/>
+			
+			<mvc:exclude-mapping path="/error"/>
+			<bean class = "primeProject.login.commons.interceptor.LogInCheckInterceptor"/> 
+		</mvc:interceptor> 
+	</mvc:interceptors>  -->
+
+	<!-- [1] DataSource 빈 선언 -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName"
+			value="oracle.jdbc.OracleDriver" />
+		<property name="url"
+			value="jdbc:oracle:thin:@127.0.0.1:1521:xe" />
+		<property name="username" value="hr" />
+		<property name="password" value="a1234" />
+	</bean>
+
+	<!-- [2] SqlSessionFactoryBean 빈 선언 name = 은 class 에 set메소드로 정의 되어있는 거임 
+		ref = "" 앞에 선언된 빈 id 참조 -->
+	<bean id="sqlSessionFactoryBean"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mapperLocations">
+			<list>
+				<value>classpath:mapper/boardMapper.xml</value>
+				<value>classpath:mapper/adminMapper.xml</value>
+				<value>classpath:mapper/hotelMapper.xml</value>
+				<value>classpath:mapper/loginMapper.xml</value>
+				<value>classpath:mapper/CrawligMapper.xml</value>
+			</list>
+		</property>
+
+	</bean>
+
+	 <!-- [3] SqlSession Template 빈 선언  -->
+	 <bean id="sqlSession"
+		class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactoryBean" />
+	</bean>
+
+	
+	<!-- [4] TransactionManager 빈 선언 -->
+
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+	<!-- [5] 선언적 트랜잭션 : <tx:advice>태그를 이용한 트랙잰션 처리 aop 이용 adivor 관리자 -->
+	<!-- <tx:advice id="txAdvice"
+		transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*Process"
+				rollback-for="org.springframe.dao.DuplicateKeyException" />
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:config>
+		<aop:pointcut
+			expression="execution(* service.*ServiceImp.*Process(..))" id="aa" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="aa" />
+	</aop:config> -->
+
+
+	<!-- @@@@@@@@@@@@@@@@@@@@@ 타임리프 리솔버 @@@@@@@@@@@@@@@@@@@@@@ -->
+	 <bean id="templateResolver"
+		class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
+		<property name="prefix" value="/WEB-INF/views/template/" />
+		<property name="suffix" value=".html" />
+
+		<property name="characterEncoding" value="utf-8" />
+		<property name="templateMode" value="HTML" />
+		<property name="order" value="1" />
+	</bean>
+
+	<!-- 바로위의 id="templateResolver" 설정을 가져와서 타임리프에 적용 -->
+	<bean id="templateEngine"
+		class="org.thymeleaf.spring5.SpringTemplateEngine">
+		<property name="templateResolver" ref="templateResolver" />
+
+	</bean>
+<!-- 
+	templateEngine bean을 매개로 타임리프 엔진에 templateResolver 의 설정을 전달 -->
+	<bean class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
+		<property name="templateEngine" ref="templateEngine" />
+		<!-- 뷰 리졸버에서 온 자료를 utf-8 형식으로 출력하게 설정 -->
+		<property name="contentType" value="text/html; charset=UTF-8" />
+		<property name="viewNames" value="*.html,*.xhtml" />
+		<property name="characterEncoding" value="utf-8" />
+		<property name="order" value="1" />
+
+	</bean> 
+	
+	
+
+	
+	
+	<!-- ViewResolver  뷰 정보 찾는거-->
+	
+	<!-- View // 뷰 정보 찾는거-->
+	
+	<bean class = "org.springframework.web.servlet.view.BeanNameViewResolver">
+		<property name="order" value = "2"/>
+	</bean>
+	
+	
+	
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/jsp/" />
+		<property name="suffix" value=".jsp" />
+		<property name="order" value = "4"/>
+	</bean> 
+	
+
+</beans>

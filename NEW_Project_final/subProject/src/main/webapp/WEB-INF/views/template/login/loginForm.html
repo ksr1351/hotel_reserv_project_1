@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link th:href="@{/resources/css/bootstrap.min.css}"
+ href="../resources/css/bootstrap.min.css" rel="stylesheet">
+<style>
+.container{
+	max-width: 560px;
+}
+.field-error {
+ border-color: #dc3545;
+ color: #dc3545;
+ }
+</style>
+<title>Insert title here</title>
+</head>
+<body>
+
+	<div class= "container">
+	
+	<h1 class = "py-5 text-center">로그인 폼</h1>
+	
+		<form action="" th:action="login" th:object="${loginMemDTO}" method = "post">
+	
+			<div th:if = "${#fields.hasGlobalErrors()}">
+				<p class = "field-error" th:each="err : ${#fields.globalErrors()}"
+				th:text="${err}">전체 오류 메세지</p>
+			
+			</div>
+			
+			
+			<div>
+				<label for = "loginId">로그인 ID</label>
+				<input type = "text" id = "loginId" th:field="*{test_Id}" 
+				class = "form-control" th:errorclass="field-error"/>
+				
+				<div class = "field-error" th:errors="*{test_Id}"></div>
+			</div>
+			
+			<div>
+				<label for = "password">비밀번호</label>
+				<input type = "password" id = "password" th:field="*{test_Pwd}"
+				class = "form-control" th:errorclass="field-error"/>
+				
+				<div class= "field-error" th:errors="*{test_Pwd}"></div>
+			</div>
+			
+			<hr class = "my-4">
+			
+			<div class= "row">
+				
+				<div class = "col text-center">
+					<button type = "submit" onclick = "" class="btn btn-warning">로그인</button>
+				</div>
+				
+				<div class = "col text-center">
+					<button onclick = "location.href='main.html'"
+					th:onclick="|location.href='@{/login}'|" type="button" 
+					class="btn btn-warning">취소</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

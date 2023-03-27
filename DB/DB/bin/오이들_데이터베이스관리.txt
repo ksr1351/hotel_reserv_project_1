@@ -1,0 +1,19 @@
+현재 있는 booking 테이블 drop
+현재 있는 booking_code_seq drop
+booking 테이블 create
+booking_code_seq create
+booking 테이블 더미데이터 insert
+- booking_code가 1이면, hotel_code도 1, 2면 2, 계속 따라감
+- 리뷰 작성할때 booking_code를 hotel_code와 맞춰야함
+
+현재 있는 review 테이블 drop
+현재 있는 review_code_seq drop
+review 테이블 create
+review_code_seq create
+- 작성된 리뷰는 없는 상태로 새로 작성하는 모습 보여주기
+- 리뷰 작성할때 booking_code를 hotel_code와 맞춰야함
+- 사진 업로드 보여주려면 /resources/images/review_img에 미리 사진 넣어놓기 > 새로고침 안하면 일단 엑박 떠버림
+
+rating 테이블 데이터 임포트
+- 현재 hotel_code 1번만 평균 평점 5점으로 제일 위에 뜨게 해놨음, 나머지는 5점보다 모두 아래
+- 리뷰 작성, 예약은 모두 hotel_code 1번 호텔에서 진행바람

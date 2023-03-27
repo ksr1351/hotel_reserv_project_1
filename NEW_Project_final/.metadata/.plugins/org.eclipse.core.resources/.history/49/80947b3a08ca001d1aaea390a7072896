@@ -1,0 +1,150 @@
+package testBoard.board.dao;
+
+import java.util.List;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import testBoard.board.dto.BookingDTO;
+import testBoard.board.dto.CheckDTO;
+import testBoard.board.dto.Hotel_Banner_InfoDTO;
+import testBoard.board.dto.Hotel_Detail_ConDTO;
+import testBoard.board.dto.Hotel_RatingDTO;
+import testBoard.board.dto.Hotel_ReviewDTO;
+import testBoard.board.dto.Hotel_Sub_InfoDTO;
+import testBoard.board.dto.ImageDTO;
+import testBoard.board.dto.PayCheckDTO;
+import testBoard.board.dto.PayPageDTO;
+import testBoard.board.dto.Room_Banner_InfoDTO;
+import testBoard.board.dto.SearchDTO;
+import testBoard.board.dto.managementDTO;
+
+@Repository
+public class HotelDAOImp implements HotelDAO {
+	
+	private final SqlSessionTemplate sqlSession;
+
+	
+	@Autowired
+	public HotelDAOImp(SqlSessionTemplate sqlSession) {
+		this.sqlSession = sqlSession;
+	}
+
+	@Override
+	public List<Hotel_Banner_InfoDTO> hotelListAll() {
+		return sqlSession.selectList("hotel.hotelListAll");
+	}
+
+	@Override
+	public List<Hotel_Banner_InfoDTO> searchHotelList(SearchDTO searchDTO) {
+		return sqlSession.selectList("hotel.searchHotelList", searchDTO);
+	}
+
+	@Override
+	public List<Hotel_Sub_InfoDTO> hotelSubInfo(int hotel_code) {
+		return sqlSession.selectList("hotel.hotelSubInfo", hotel_code);
+	}
+
+	
+	//room
+	
+	@Override
+	public List<Room_Banner_InfoDTO> roomList(SearchDTO searchDTO) {
+		return sqlSession.selectList("hotel.roomList", searchDTO);
+	}
+
+	@Override
+	public List<Hotel_Detail_ConDTO> Hotel_Detail_infoMathod(int hotel_code) {
+		
+		return sqlSession.selectList("hotel.hotel_detail_info", hotel_code);
+	}
+
+	@Override
+	public List<Hotel_ReviewDTO> Hotel_ReviewMethod(int hotel_code) {
+	
+		return sqlSession.selectList("hotel.getReviewsByHotel", hotel_code);
+	}
+
+	@Override
+	public int insertReview(Hotel_ReviewDTO review) {
+		
+		return sqlSession.insert("hotel.insertReview", review);
+	}
+
+	@Override
+	public int insertReviewImage(ImageDTO reviewImage) {
+		
+		return sqlSession.insert("hotel.insertReviewImage", reviewImage);
+	}
+
+	@Override
+	public int updateReview(Hotel_ReviewDTO review) {
+
+		return sqlSession.update("hotel.updateReview", review);
+	}
+
+	@Override
+	public int deleteReview(int review_code) {
+		
+		return sqlSession.delete("hotel.deleteReview", review_code);
+	}
+
+	@Override
+	public double getAvgRating(int hotel_code) {
+		
+		return sqlSession.selectOne("hotel.getAvgRating", hotel_code);
+	}
+
+	@Override
+	public int getCntRating(int hotel_code) {
+		
+		return sqlSession.selectOne("hotel.getCntRating", hotel_code);
+	}
+
+	@Override
+	public int updateRating(Hotel_RatingDTO rating) {
+		
+		return sqlSession.update("hotel.updateRating", rating);
+	}
+
+	@Override
+	public List<managementDTO> menagementMethod() {
+		
+		return sqlSession.selectList("admin.management");
+	}
+	
+	
+	@Override
+	   public int deleteReviewImage(int review_code) {
+	      return sqlSession.delete("hotel.deleteReviewImage", review_code);
+	   }
+
+	@Override
+	public List<CheckDTO> myPageMethod(int mem_code) {
+		
+		return sqlSession.selectList("hotel.myPage",mem_code);
+	}
+
+	@Override
+	public int insertBusinessComment(Hotel_ReviewDTO review) {
+
+		return sqlSession.update("hotel.insertBusinessComment", review);
+	}
+
+	@Override
+	public PayPageDTO PayPageMethod(PayCheckDTO payCheckDTO) {
+	
+		return sqlSession.selectOne("hotel.payPage",payCheckDTO);
+	}
+
+	@Override
+	public int PaymentMethod(BookingDTO bookingDTO) {
+		
+		return sqlSession.insert("hotel.booking",bookingDTO );
+	}
+	
+	
+	
+
+}

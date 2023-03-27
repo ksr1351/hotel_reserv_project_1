@@ -1,0 +1,31 @@
+package testBoard.board.dto;
+
+public class Hotel_infoDTO {
+
+	private String info;
+	
+	public Hotel_infoDTO() {
+	}
+
+	public Hotel_infoDTO(String info) {
+		this.info = info;
+	}
+
+	public String getInfo() {
+		return info;
+	}
+
+	public void setInfo(String info) {
+		this.info = info;
+	}
+
+	@Override
+	public String toString() {
+		return "Hotel_infoDTO [info=" + info + "]";
+	}
+	
+	
+	
+	
+	
+}

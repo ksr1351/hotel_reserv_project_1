@@ -1,0 +1,89 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>예약자 목록</title>
+        <link rel="stylesheet" href="/resources/testMainPage/admin/css/reservation.css">
+    </head>
+    <body>
+        <div class="board_list_wrap">
+            <table class="board_list">
+                <h1>예약자 목록</h1>
+                <!-- <a href="../게시판/notice_board.html"> -->
+                  
+                <button class="write-btn">관리자 수정</button>
+                </a>
+                <thead>
+                    <tr>
+                        <th>예약번호</th>
+                        <th>예약내용</th>
+                        <th>핸드폰번호</th>
+                        <th>예약자 성함</th>
+                        <th>예약날자</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        
+                        <td class="tit">
+                            <a href="#">프리 퀀 - 어른2명, 아이X, 차량X, 조식X</a>
+                        </td>
+                        <td>010-1234-5678</td>
+                        <td>파이썬 님</td>
+                        <td>2023.03.18</td>
+                        <td><button>삭제</button></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td class="tit">
+                            <a href="#">배리어 프리 룸 - 어른2명, 아이X, 차량2대, 조식O</a>
+                        </td>
+                        <td>010-1234-5678</td>
+                        <td>자바 님</td>
+                        <td>2023.03.17-18</td>
+                        <td><button>삭제</button></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td class="tit">
+                            <a href="#">프티 퀸 - 어른3명, 아이X, 차량X, 조식O</a>
+                        </td>
+                        <td>010-1234-5678</td>
+                        <td>스프링 님</td>
+                        <td>2023.03.16</td>
+                        <td><button>삭제</button></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td class="tit">
+                            <a href="#">부티크 킹- 어른O, 아이X, 차랑X, 조식X</a>
+                        </td>
+                        <td>010-1234-5678</td>
+                        <td>노드 님</td>
+                        <td>2023.03.15-16</td>
+                        <td><button>삭제</button></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td class="tit">
+                            <a href="#">파노라믹 스위트 - 어른2명, 아이1명, 차량O, 조식O</a>
+                        </td>
+                        <td>010-1234-5678</td>
+                        <td>리눅스 님</td>
+                        <td>2023.03.01</td>
+                        <td><button>삭제</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="paging">
+                <a href="#" class="bt">첫 페이지</a>
+                <a href="#" class="num on">1</a>
+                <a href="#" class="num">2</a>
+                <a href="#" class="num">3</a>
+                <a href="#" class="bt">마지막 페이지</a>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="inform">
+
+	<!-- 총 게시글 갯수 출력 -->
+	<select id="count" resultType="int" parameterType="testBoard.inform.dto.InformPageDTO">
+		SELECT COUNT(notice_code) FROM notice
+		<!-- WHERE board_code > 0 -->
+		WHERE 1=1  <!-- 검색어가 지정되지 않을 경우 -->
+		<if
+			test="(searchWord != null or searchWord != '') and searchKey == 'title' ">
+			AND TITLE LIKE '%${searchWord}%'
+		</if>
+		<if
+			test="(searchWord != null or searchWord != '') and searchKey == 'content' ">
+			AND CONTENT LIKE '%${searchWord}%'
+		</if>
+		<!-- <if
+			test="(searchWord != null or searchWord != '') and searchKey == 'admin_id' ">
+			AND ADMIN_ID LIKE '%${searchWord}%'
+		</if> -->
+	</select>
+
+	<!-- 게시물 목록 및 페이징 -->
+		<select id="list" 
+			parameterType="testBoard.inform.dto.InformPageDTO" 
+			resultType="testBoard.inform.dto.InformDTO">
+	        SELECT *
+		    FROM (
+		    SELECT ROWNUM AS RN, A.*
+		    FROM (
+		    SELECT *
+		    FROM
+		    notice
+		    WHERE 1=1
+	      <if
+	         test="(searchWord != null or searchWord != '') and searchKey == 'title' ">
+	         AND TITLE LIKE '%${searchWord}%'
+	      </if>
+	      <if
+	         test="(searchWord != null or searchWord != '') and searchKey == 'content' ">
+	         AND CONTENT LIKE '%${searchWord}%'
+	      </if>
+	      <!-- <if
+	         test="(searchWord != null or searchWord != '') and searchKey == 'admin_id' ">
+	         AND ADMIN_ID LIKE '%${searchWord}%'
+	      </if> -->
+	      ORDER BY notice_code DESC
+	      ) A
+	      )
+	      WHERE RN BETWEEN
+	      #{startRow} AND
+	      #{endRow}
+	   </select>
+
+	<!-- 게시물 검색 -->
+	<select id="selectSearchList"
+		parameterType="testBoard.inform.dto.InformPageDTO"
+		resultType="testBoard.inform.dto.InformDTO">
+		SELECT *
+		FROM notice
+		WHERE delete_yn='N'
+		<choose>
+			<when test="searchKey !=null and searchKey.equals('title')">
+				WHERE title LIKE CONCAT('%', #{searchWord}, '%')
+			</when>
+			<when test="searchKey !=null and searchKey.equals('content')"> 
+				WHERE content LIKE CONCAT('%', #{searchWord}, '%') 
+			</when>
+			<!-- <when test="searchKey !=null and searchKey.equals('admin_id')"> 
+				WHERE admin_id LIKE CONCAT('%', #{searchWord}, '%') 
+			</when> -->
+			<otherwise>
+				AND 1=0 <!--검색어가 없는 경우 결과가 없도록-->
+			</otherwise>
+		</choose>
+	</select>
+
+	<!-- 게시물 조회 -->
+	<select id="read" 
+		parameterType="int"
+		resultType="testBoard.inform.dto.InformDTO">
+		SELECT *
+		FROM notice
+		WHERE notice_code = #{notice_code}
+	</select>
+
+	<!-- 게시물 작성 -->
+	<insert id="write" 
+		parameterType="testBoard.inform.dto.InformDTO">
+		INSERT INTO notice(notice_code, title, content, upload, admin_id)
+		VALUES(notice_code_seq.nextval, 
+		#{title}, #{content}, #{upload, jdbcType=VARCHAR}, #{admin_id})
+	</insert>
+
+	<!-- 게시물 수정 -->
+	<update id="update" parameterType="testBoard.inform.dto.InformDTO">
+		UPDATE notice
+		SET
+		title = #{title},
+		content = #{content},
+		regdate = sysdate
+		<if test="upload != null">
+		, upload = #{upload, jdbcType=VARCHAR}
+		</if>
+		
+		WHERE notice_code = #{notice_code}
+	</update>
+
+	<!-- 게시물 삭제 -->
+	<delete id="delete" parameterType="int">
+		DELETE
+		FROM notice
+		WHERE
+		notice_code = #{notice_code}
+	</delete>
+	
+	<!-- 게시물 조회수 -->
+   <update id="readCount" parameterType="int">
+      UPDATE notice
+      SET readCount =
+      readCount + 1
+      WHERE notice_code = #{notice_code}
+   </update>
+   
+   <!-- 첨부파일 다운로드 -->
+	<select id="getFile" parameterType="int" resultType="string">
+		SELECT
+		upload
+		FROM notice
+		WHERE notice_code = #{notice_code}
+
+	</select>
+   
+
+</mapper>

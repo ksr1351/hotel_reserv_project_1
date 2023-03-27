@@ -1,0 +1,289 @@
+.header {
+  padding: 0 40px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: whitesmoke;
+  background-color: #00B9FF;
+}
+
+.header h1 a {
+  text-decoration: none;
+  color: whitesmoke;
+  font-family: "Jalnan";
+  font-size: 20px;
+  padding-left: 350px;
+  position: grid;
+  margin-bottom: 20px;
+}
+
+.header h1 .cate {
+  margin-left: 350px;
+  color: whitesmoke;
+  font-family: "Jalnan";
+  font-size: 70px;
+}
+
+.nav ul {
+  margin-right: 350px;
+}
+
+.nav ul li {
+  display: inline-block;
+  margin: 0 10px;
+}
+.nav ul li a {
+  text-decoration: none;
+  color: whitesmoke;
+  position: grid;
+  margin-bottom: 90px;
+}
+
+.section .hotel-list {
+  width: 750px;
+  float: right;
+  position: relative;
+  margin-right:70px
+}
+
+.section .hotel-list .hotel-img {
+  height: 2%;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.hotel-list .hotel-text {
+  position: absolute;
+  color: white;
+  top: 55%;
+  left: 1%;
+  width: 100%;
+  font-size: 30px;
+  font-weight: 700;
+  pointer-events: none;
+}
+
+.hotel-list .text1 {
+  position: absolute;
+  color: orange;
+  top: 65%;
+  left: 1%;
+  width: 50%;
+  font-size: 25px;
+  pointer-events: none;
+}
+
+
+
+.hotel-list .text2 {
+  position: absolute;
+  color: white;
+  top: 75%;
+  left: 1%;
+  width: 50%;
+  font-size: 25px;
+  pointer-events: none;
+}
+
+.hotel-list .text3{
+  position: absolute;
+  color: white;
+  top: 85%;
+  left: 1%;
+  width: 50%;
+  font-size: 25px;
+  pointer-events: none;
+}
+
+.hotel-list .price {
+  position: absolute;
+  color: white;
+  top: 94%;
+  left: 85%;
+  width: 50%;
+  font-size: 15px;
+  pointer-events: none;
+}
+
+.section .section-center {
+  padding-top: 10px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+#booking {
+  font-family: "Poppins", sans-serif;
+}
+
+.booking-form {
+  background: #fff;
+  border-radius: 2px;
+  margin-bottom: 10px;
+}
+
+.booking-form > form .row.no-margin {
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+.booking-form > form .row.no-margin > [class*="col-"] {
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
+.booking-form .form-group {
+  position: relative;
+  padding: 25px;
+  margin-bottom: 0px;
+}
+
+.booking-form .form-group:after {
+  content: "";
+  background: rgba(129, 131, 144, 0.15);
+  position: absolute;
+  top: 25px;
+  bottom: 0;
+  right: 0px;
+  width: 2px;
+  height: 75px;
+}
+
+.booking-form .form-control {
+  background-color: transparent;
+  border-radius: 0px;
+  border: none;
+  height: 50px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  font-size: 20px;
+  color: #222;
+  font-weight: 400;
+  padding: 0;
+}
+
+.booking-form .form-control::-webkit-input-placeholder {
+  color: #818390;
+}
+
+.booking-form .form-control:-ms-input-placeholder {
+  color: #818390;
+}
+
+.booking-form .form-control::placeholder {
+  color: #818390;
+}
+
+.booking-form input[type="date"].form-control:invalid {
+  color: #818390;
+}
+
+.booking-form select.form-control {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.booking-form select.form-control + .select-arrow {
+  position: absolute;
+  right: 0px;
+  bottom: 30px;
+  width: 32px;
+  line-height: 32px;
+  height: 32px;
+  text-align: center;
+  pointer-events: none;
+  color: #00B9FF;
+  font-size: 14px;
+}
+
+.booking-form select.form-control + .select-arrow:after {
+  content: "\279C";
+  display: block;
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+.booking-form .form-label {
+  color: #00B9FF;
+  display: block;
+  font-weight: 400;
+  height: 25px;
+  line-height: 25px;
+  font-size: 14px;
+}
+
+.booking-form .form-btn {
+  padding: 25px;
+}
+
+.booking-form .submit-btn {
+  background: #00B9FF;
+  border: none;
+  text-transform: capitalize;
+  display: block;
+  border-radius: 2px;
+  width: 100%;
+  height: 75px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff;
+}
+
+.hotel-list .hotel-img {
+  position: relative;
+}
+
+.place-title {
+  margin-bottom: 50px;
+  margin-left: 50px;
+}
+
+.check-section {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  border: solid 2px rgba(0, 0, 0, 0.08);
+  width: 200px;
+  text-align: center;
+}
+
+.check-sub {
+  line-height: 2;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 800;
+  border-bottom: solid 1px #bcbcbc;
+  margin: 20px auto;
+}
+
+.label_chk1 {
+  margin-top: 20px;
+}
+
+.label_chk {
+  line-height: 2;
+}
+
+.check_star {
+  line-height: 3;
+  text-decoration: underline;
+}
+
+*/ footer {
+  border-top: 1px solid lightgray;
+  position: absolute;
+  padding-top: 30px;
+  width: 2114px;
+  margin: 0 auto;
+  top: 10;
+  bottom: 0;
+  left: 0;
+  background-color: whitesmoke;
+  height: 100px;
+  text-align: center;
+  color: #aaa;
+}\

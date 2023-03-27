@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thyemleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link th:href="@{/resources/css/bootstrap.min.css}"
+ href="../resources/css/bootstrap.min.css" rel="stylesheet">
+</head>
+</head>
+<body>
+	
+	<div class = "container">
+	
+	
+	<div class = "py-5 text-center" >
+		<h1>로그인 메인 페이지</h1>
+	</div>
+	
+	
+		<button type ="button" class="btn btn-warning" th:onclick = "|location.href = '@{/members/add}'|">회원가입</button>
+		<button type = "button" class="btn btn-warning" th:onclick="|location.href = '@{/login}'|">로그인</button>
+		<button type = "button" class="btn btn-warning" th:onclick="|location.href = '@{/reservePage}'|">예약하기</button>
+	</div>
+</body>
+</html>

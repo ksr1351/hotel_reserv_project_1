@@ -1,0 +1,2 @@
+var hotel_code = $('#hotel_code').val();
+

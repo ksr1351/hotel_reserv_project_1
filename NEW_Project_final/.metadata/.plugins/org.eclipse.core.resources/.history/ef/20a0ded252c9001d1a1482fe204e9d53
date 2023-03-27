@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<link rel="shortcut icon" href="#">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/resources/testMainPage/js/member.js"></script>
+<link rel="stylesheet" href="/resources/testMainPage/css/member.css"
+	type="text/css" />
+<title>로그인 페이지</title>
+
+<style type="text/css">
+.field-error {
+	border-color: #dc3545;
+	color: #dc3545;
+}
+</style>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+<script th:inline="javascript">
+	function checkId() {
+		var mem_Id = $('#mem_Id').val();
+
+		$.ajax({
+			url : '/members/idCheck',
+			type : 'post',
+			data : {
+				mem_Id : mem_Id
+			},
+			success : function(cnt) {
+
+				if (cnt != 1 && mem_Id.length > 7) { //사용가능한 아이디
+					$('.id_ok').css("display", "inline-block");
+					$('.id_already').css("display", "none");
+				} else if (cnt == 1 && mem_Id.length > 7) { //중복된 아이디
+					$('.id_already').css("display", "inline-block");
+					$('.id_ok').css("display", "none");
+				} else { // id에 아무것도 입력하지 않을 경우 중복검사 문구 모두 안보이게 설정
+					$('.id_ok').css("display", "none");
+					$('.id_already').css("display", "none");
+				}
+
+			},
+
+			error : function(request, error) {
+				alert("에러입니다.");
+				alert("code : " + reqeust.status + "\n" + "message:"
+						+ request.responseText + "\n" + "error:" + error);
+
+			}
+
+		});
+
+	};
+</script>
+
+
+</head>
+<body>
+	<div id="booking" class="section">
+		<div class="header">
+			<h1>
+				<a href="/">거긴어때</a>
+			</h1>
+			<div class="nav">
+				<ul>
+					<li><a href="/room">호텔정보</a></li>
+					<li><a href="/check">예약내역</a></li>
+					<li><a href="/board">게시판</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="cotn_principal">
+			<div class="cont_centrar">
+				<div class="cont_login">
+					<div class="cont_info_log_sign_up">
+						<div class="col_md_login">
+							<div class="cont_ba_opcitiy">
+								<h2>일반 회원</h2>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+								</p>
+								<button class="btn_login" onclick="cambiar_login()">가입
+								</button>
+							</div>
+						</div>
+						<div class="col_md_sign_up">
+							<div class="cont_ba_opcitiy">
+								<h2>기업 회원</h2>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+								</p>
+								<button class="btn_sign_up" onclick="cambiar_sign_up()">
+									가입</button>
+							</div>
+						</div>
+					</div>
+
+					<div class="cont_back_info">
+						<div class="cont_img_back_grey">
+							<img
+								src="https://images.unsplash.com/42/U7Fc1sy5SCUDIu4tlJY3_NY_by_PhilippHenzler_philmotion.de.jpg?ixlib=rb-0.3.5&q=50&fm=jpg&crop=entropy&s=7686972873678f32efaf2cd79671673d"
+								alt="" />
+						</div>
+					</div>
+					<div class="cont_forms">
+						<div class="cont_img_back_">
+							<img
+								src="https://images.unsplash.com/42/U7Fc1sy5SCUDIu4tlJY3_NY_by_PhilippHenzler_philmotion.de.jpg?ixlib=rb-0.3.5&q=50&fm=jpg&crop=entropy&s=7686972873678f32efaf2cd79671673d"
+								alt="" />
+						</div>
+
+						<form action="" th:action="add" th:object="${addMemDTO}"
+							method="post">
+							<div class="cont_form_login">
+								<a href="#" onclick="ocultar_login_sign_up()"> <i
+									class="material-icons">&#xE5C4;</i></a>
+								<h2>일반 회원 가입</h2>
+
+								<input type="text" id="mem_Id" name="mem_Id" th:field="*{mem_Id}"
+									placeholder="아이디" th:errorclass="field-error" required oninput="checkId()" />
+									<span class="id_ok"style="color: green; display: none;">사용 가능한 아이디입니다.</span>
+									<span class="id_already" style="color: red; display: none;">이미 사용중인 아이디입니다.</span>
+
+									<div class="field-error" th:errors="*{mem_Id}"></div>
+
+
+								<!--중복 확인 글씨-->
+								<!-- <button class="btn_check" onclick="id_check()">중복확인</button> -->
+
+								<input type="password" id="password" th:field="*{mem_Pwd}"
+									placeholder="비밀번호" th:errorclass="field-error" />
+								<div class="field-error" th:errors="*{mem_Pwd}"></div>
+
+
+
+								<input type="text" id="name" th:field="*{mem_Name}"
+									placeholder="성함" th:errorclass="field-error" />
+
+								<div class="field-error" th:errors="*{mem_Name}"></div>
+
+
+								<input type="tel" id="tel" placeholder="전화번호"
+									th:field="*{mem_Phone}" th:errorclass="field-error" />
+								<div class="field-error" th:errors="*{mem_Phone}"></div>
+
+
+
+								<input type="email" id="email" placeholder="이메일"
+									th:field="*{mem_Email}" th:errorclass="field-error" />
+								<div class="field-error" th:errors="*{mem_Email}"></div>
+
+
+								<input type="hidden" name="memberType" value="1">
+								<button class="btn_login">가입하기</button>
+								<!-- onclick="sign_up()" -->
+							</div>
+
+						</form>
+
+
+						<form action="" th:action="add" th:object="${addMemDTO}"
+							method="post">
+
+							<div class="cont_form_sign_up">
+								<a href="#" onclick="ocultar_login_sign_up()"><i
+									class="material-icons">&#xE5C4;</i></a>
+								<h2>기업 회원 가입</h2>
+
+								<input type="text" id="bizId" th:field="*{mem_Id}"
+									placeholder="아이디" th:errorclass="field-error" required
+									oninput="checkId()" /> <span class="id_ok"
+									style="color: green; display: none;">사용 가능한 아이디입니다.</span> <span
+									class="id_already" style="color: red; display: none;">이미
+									사용중인 아이디입니다.</span>
+
+								<div class="field-error" th:errors="*{mem_Id}"></div>
+
+								<!-- <button class="btn_check" onclick="id_check()">중복확인</button> -->
+
+								<input type="password" id="bizPassword" placeholder="비밀번호"
+									th:field="*{mem_Pwd}" th:errorclass="field-error" />
+								<div class="field-error" th:errors="*{mem_Pwd}"></div>
+
+
+
+								<input type="text" id="bizName" th:field="*{mem_Name}"
+									placeholder="기업명" th:errorclass="field-error" />
+								<div class="field-error" th:errors="*{mem_Name}"></div>
+
+								<input type="number" id="bizNumber" th:field="*{mem_Phone}"
+									placeholder="사업자 번호" th:errorclass="field-error" />
+								<div class="field-error" th:errors="*{mem_Phone}"></div>
+
+								<input type="email" id="bizEmail" th:field="*{mem_Email}"
+									placeholder="이메일" th:errorclass="field-error" />
+								<div class="field-error" th:errors="*{mem_Email}"
+									th:errorclass="field-error"></div>
+
+								<input type="hidden" name="memberType" value="2">
+
+								<button class="btn_sign_up">가입하기</button>
+								<!-- onclick="biz_sign_up()" -->
+							</div>
+
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<div style="padding-top: 20%;">
+	<footer>
+		<p>거기어때컴퍼니는 통신판매중개자로서 통신판매의 당사자가 아니며, 상품의 예약, 이용 및 환불 등과 관련한 의무와
+			책임은 각 판매자에게 있습니다.</p>
+		<address>주소:서울특별시 강남구|대표이사:오이들|사업자등록번호:123-45-67894</address>
+	</footer>
+</div>
+
+</html>

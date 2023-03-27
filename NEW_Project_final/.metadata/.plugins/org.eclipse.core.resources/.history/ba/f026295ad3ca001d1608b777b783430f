@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board">
+
+
+	<!-- 총 게시글 갯수 출력 -->
+	<select id="count" resultType="int"
+		parameterType="testBoard.free.dto.BoardFreePageDTO">
+		SELECT COUNT(board_code) FROM board
+		<!-- WHERE board_code > 0 -->
+		WHERE 1=1
+
+		<if
+			test="(searchWord != null or searchWord != '') and searchKey == 'title' ">
+			AND TITLE LIKE '%${searchWord}%'
+		</if>
+
+		<if
+			test="(searchWord != null or searchWord != '') and searchKey == 'content' ">
+			AND CONTENT LIKE '%${searchWord}%'
+		</if>
+
+		<if
+			test="(searchWord != null or searchWord != '') and searchKey == 'customer_code' ">
+			AND CUSTOMER_CODE LIKE '%${searchWord}%'
+		</if>
+
+	</select>
+
+
+	<!-- 게시물 목록 & 페이징 -->
+	<select id="list"
+		parameterType="testBoard.free.dto.BoardFreePageDTO"
+		resultType="testBoard.free.dto.BoardFreeDTO">
+		SELECT *
+		FROM (
+		SELECT ROWNUM AS RN, A.*
+		FROM (
+		SELECT *
+		FROM
+		board
+		WHERE 1=1
+		<if
+			test="(searchWord != null or searchWord != '') and searchKey == 'title' ">
+			AND TITLE LIKE '%${searchWord}%'
+		</if>
+
+		<if
+			test="(searchWord != null or searchWord != '') and searchKey == 'content' ">
+			AND CONTENT LIKE '%${searchWord}%'
+		</if>
+
+		<if
+			test="(searchWord != null or searchWord != '') and searchKey == 'customer_code' ">
+			AND CUSTOMER_CODE LIKE '%${searchWord}%'
+		</if>
+		ORDER BY Board_code DESC
+		) A
+		)
+		WHERE RN BETWEEN
+		#{startRow} AND
+		#{endRow}
+	</select>
+
+
+
+
+	<!-- 게시물 검색 -->
+	<select id="selectSearchList"
+		parameterType="testBoard.free.dto.BoardFreePageDTO"
+		resultType="testBoard.free.dto.BoardFreeDTO">
+		SELECT *
+		FROM board
+		WHERE delete_yn='N'
+		<choose>
+			<when test="searchKey !=null and searchKey.equals('title')">
+				WHERE title LIKE CONCAT('%', #{searchWord}, '%')
+			</when>
+			<when test="searchKey !=null and searchKey.equals('content')">
+				WHERE content LIKE CONCAT('%', #{searchWord}, '%')
+			</when>
+			<when
+				test="searchKey !=null and searchKey.equals('customer_code')">
+				WHERE customer_code LIKE CONCAT('%', #{searchWord}, '%')
+			</when>
+			<otherwise>
+				AND 1=0 <!--검색어가 없는 경우 결과가 없도록 -->
+			</otherwise>
+		</choose>
+	</select>
+
+
+	<!-- 게시물 작성 -->
+	<insert id="write"
+		parameterType="testBoard.free.dto.BoardFreeDTO">
+		INSERT INTO board(board_code, title, content, upload,
+		customer_code)
+		VALUES(board_code_seq.nextval, #{title},
+		#{content},#{upload, jdbcType=VARCHAR},
+		#{customer_code})
+	</insert>
+
+
+
+	<!-- 게시물 상세조회 -->
+	<select id="read" parameterType="int"
+		resultType="testBoard.free.dto.BoardFreeDTO">
+		SELECT *
+		FROM board
+		WHERE board_code = #{board_code}
+	</select>
+
+
+	<!-- 게시물 조회수 -->
+	<update id="readCount" parameterType="int">
+		UPDATE board
+		SET readCount =
+		readCount + 1
+		WHERE board_code = #{board_code}
+	</update>
+
+
+	<!-- 게시물 수정 -->
+	<update id="update"
+		parameterType="testBoard.free.dto.BoardFreeDTO">
+		UPDATE board
+		SET
+		title = #{title}
+		, content = #{content}
+		, regdate = sysdate
+		<if test="upload != null">
+		, upload = #{upload, jdbcType=VARCHAR}
+		</if>
+		WHERE board_code=#{board_code}
+
+	</update>
+
+
+	<!-- 게시물 삭제 -->
+	<delete id="delete" parameterType="int">
+		DELETE
+		FROM board
+		WHERE
+		board_code = #{board_code}
+	</delete>
+
+
+	<!-- 댓글 조회 -->
+	<select id="readReply"
+		resultType="testBoard.free.dto.BoardFreeReplyDTO">
+		SELECT reply_code, content, customer_code, regdate
+		FROM
+		board_reply
+		WHERE board_code = #{board_code}
+	</select>
+
+
+	<!-- 댓글 데이터 가져오기 -->
+	<select id="getReplyData" parameterType="int"
+		resultType="java.util.HashMap">
+
+		SELECT reply_code, content, customer_code, regdate
+		FROM
+		board_reply
+		WHERE
+		reply_code = #{reply_code}
+	</select>
+
+
+	<!-- 댓글 작성 -->
+	<insert id="writeReply">
+		INSERT INTO board_reply(
+		board_code, reply_code,
+		content, mem_code)
+		VALUES(
+		#{board_code}, board_reply_seq.nextval,
+		#{content}, #{mem_code}
+		)
+	</insert>
+
+
+	<!-- 댓글 수정 -->
+	<update id="updateReply"
+		parameterType="testBoard.free.dto.BoardFreeReplyDTO">
+		UPDATE board_reply
+		SET
+		content = #{content,jdbcType=VARCHAR},
+		regdate =
+		sysdate
+		WHERE reply_code = #{reply_code} <!-- 업데이트할 레코드 지정 -->
+	</update>
+
+
+	<!-- 댓글 삭제 -->
+	<delete id="deleteReply" parameterType="int">
+		DELETE
+		FROM board_reply
+		WHERE reply_code = #{reply_code}
+	</delete>
+
+
+	<!-- 첨부파일 다운로드 -->
+	<select id="getFile" parameterType="int" resultType="string">
+		SELECT
+		upload
+		FROM board
+		WHERE board_code = #{board_code}
+
+	</select>
+
+
+
+
+
+
+</mapper>
+
+
+
+

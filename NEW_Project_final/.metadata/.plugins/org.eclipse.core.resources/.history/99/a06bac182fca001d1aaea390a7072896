@@ -1,0 +1,24 @@
+package testBoard.board.dto;
+
+import java.util.List;
+
+public class SearchDTO {
+	private String checkin;
+	private String checkout;
+	private int hotel_code;
+	
+	   private String location;
+	   private List<String> type;
+	   private List<String> bedType;
+	   private List<String> filter;
+
+	
+	
+
+
+
+	
+	
+	
+	
+}

@@ -1,0 +1,40 @@
+package testBoard.board.controller;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+public class test {
+	
+	
+	public static void main(String[] args) throws ParseException {
+		
+		String data1 = "2023-04-01";
+		
+		String data2 = "2023-04-03";
+		
+		String price = "150,000원";
+		
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		
+		Date d1 = format.parse(data1);
+		
+		Date d2 = format.parse(data2);
+		
+		System.out.println(d1);
+		
+		System.out.println(d2);
+		
+		long Days = (d1.getTime() - d2.getTime())/3600000;
+		
+		System.out.println(Days);
+		
+		
+		
+	}
+	
+
+	
+}

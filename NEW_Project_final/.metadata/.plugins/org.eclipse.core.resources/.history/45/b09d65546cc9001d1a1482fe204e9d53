@@ -1,0 +1,17 @@
+package testBoard.board.dto;
+
+public class PayPageDTO {
+	
+	
+	private int room_code;
+	private int hotel_code;
+	
+	private String name;
+	private String room_name;
+	private String room_price;
+	
+	private String checkin;
+	private Stirng checkout;
+	
+	
+}

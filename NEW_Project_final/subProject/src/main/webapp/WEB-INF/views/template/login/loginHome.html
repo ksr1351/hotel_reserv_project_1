@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link th:href="@{/resources/css/bootstrap.min.css}"
+ href="../resources/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+	<div class = "container">
+		
+		<div class = "py-5 test-center">
+			<h1>로그인 홈 화면</h1>
+		</div>
+	
+		
+		<h2 class = "mb-3" th:text="|로그인 : ${member.test_Name}|"></h2>
+		
+		<hr class = "my-4">
+		
+		<div class = "col">
+			<form action="" th:action="@{/logout}" method = "post">
+				<button class="btn btn-warning" type = "submit">로그아웃</button>
+			</form>
+			
+			<button type = "button" class="btn btn-warning" th:onclick="|location.href = '@{/reservePage}'|">예약하기</button>
+		</div>
+		
+	</div>
+	
+	
+	
+</body>
+</html>

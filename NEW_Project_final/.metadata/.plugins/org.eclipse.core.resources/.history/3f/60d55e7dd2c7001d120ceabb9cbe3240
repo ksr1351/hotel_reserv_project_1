@@ -1,0 +1,28 @@
+package testBoard.board.dto;
+
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+public class management {
+
+	private int booking_code;
+	private int name;
+	private int room_name;
+	private int mem_name;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date regdate;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date checkin;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date checkout;
+	
+	private String status;
+	
+	
+	
+	
+}

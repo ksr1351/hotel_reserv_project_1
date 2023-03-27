@@ -1,0 +1,26 @@
+1679206501459	Rename type 'Hotel_detail_Con'
+1679206519362	Rename type 'Hotel_Detail_Con'
+1679299823243	Encapsulate field 'review_code'
+1679313148616	Delete element
+1679362317304	Delete element
+1679362393789	Rename resource 'adminPage.jsp'
+1679376427257	Delete element
+1679376747946	Delete element
+1679376796427	Delete element
+1679377180307	Delete element
+1679378734363	Delete element
+1679384423997	Delete element
+1679396738588	Delete element
+1679468269511	Rename resource 'check.jsp'
+1679468281146	Rename resource 'mypage.jsp'
+1679554775847	Delete element
+1679563612722	Encapsulate field 'business_comment'
+1679570105905	Rename type 'PapPageDTO'
+1679653849645	Delete element
+1679721144026	Delete elements
+1679721320197	Move file
+1679727155592	Delete element
+1679727862552	Delete element
+1679727884929	Delete element
+1679727908435	Delete element
+1679745640789	Rename resource 'patment'

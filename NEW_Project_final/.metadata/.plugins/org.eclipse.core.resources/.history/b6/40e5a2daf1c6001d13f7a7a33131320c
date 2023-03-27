@@ -1,0 +1,13 @@
+package testBoard.board.dto;
+
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+public class Hotel_ReviewDTO {
+	
+	
+	
+	
+	
+}

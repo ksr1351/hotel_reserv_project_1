@@ -1,0 +1,8 @@
+INDEX VERSION 1.4+/Users/txwxkx/Desktop/NEW_Project/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
+225397979.index
+2682184135.index
+718396466.index
+4241917421.index
+3318301523.index
+584225863.index
+906355510.index

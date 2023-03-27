@@ -1,0 +1,36 @@
+.container {
+  padding-top:200px;
+  padding-left:100px;
+ }
+
+ 
+ #content {
+  height:200px;
+  width: 1000px;
+  }
+
+  #title {
+    height: 40px;
+    width: 1000px;
+  }
+
+  #writer {
+    height: 40px;
+    width: 1000px;
+
+  }
+  
+*/ footer {
+  border-top: 1px solid lightgray;
+  position: absolute;
+  padding-top: 30px;
+  width: 2114px;
+  margin: 0 auto;
+  top: 10;
+  bottom: 0;
+  left: 0;
+  background-color: whitesmoke;
+  height: 100px;
+  text-align: center;
+  color: #aaa;
+}

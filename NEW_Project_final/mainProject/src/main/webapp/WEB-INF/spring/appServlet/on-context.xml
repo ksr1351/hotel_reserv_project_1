@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	
+	<bean id="templateResolver"
+		class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
+		<property name="prefix" value="/resources/template/" />
+		<property name="suffix" value=".html" />
+	
+		<property name="characterEncoding" value="utf-8" />
+		<property name="templateMode" value="HTML" />
+		
+	</bean>
+
+	<!-- 바로위의 id="templateResolver" 설정을 가져와서 타임리프에 적용 -->
+	<bean id="templateEngine"
+		class="org.thymeleaf.spring5.SpringTemplateEngine">
+		<property name="templateResolver" ref="templateResolver" />
+
+	</bean>
+
+	<!-- templateEngine bean을 매개로 타임리프 엔진에 templateResolver 의 설정을 전달 -->
+	<bean class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
+		<property name="templateEngine" ref="templateEngine" />
+		<!-- 뷰 리졸버에서 온 자료를 utf-8 형식으로 출력하게 설정 -->
+		<property name="contentType" value="text/html; charset=UTF-8" />
+		<property name="viewNames" value="*.html,*.xhtml" />
+		<property name="characterEncoding" value="utf-8" />
+		<property name="order" value="1" />
+
+	</bean>
+	
+		<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	 <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+		<property name="order" value="2" />
+	</bean>
+	 
+	
+
+</beans>

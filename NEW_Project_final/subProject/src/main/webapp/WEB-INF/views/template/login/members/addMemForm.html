@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link th:href="@{/resources/css/bootstrap.min.css}"
+ href="../resources/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+.container {
+ max-width: 560px;
+ }
+ .field-error {
+ border-color: #dc3545;
+ color: #dc3545;
+ }
+</style>
+
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script th:inline = "javascript">
+		
+		function checkId(){
+			var test_Id = $('#test_Id').val();
+			
+			$.ajax({
+				url:'/members/idCheck',
+				type:'post',
+				data:{ test_Id : test_Id },
+				success:function(cnt){
+					
+					if(cnt != 1 && test_Id.length> 7){  //사용가능한 아이디
+						$('.id_ok').css("display", "inline-block");
+						$('.id_already').css("display","none");
+					} else if (cnt ==1 && test_Id.length>7){  //중복된 아이디
+						$('.id_already').css("display","inline-block");
+						$('.id_ok').css("display", "none");
+					} else { // id에 아무것도 입력하지 않을 경우 중복검사 문구 모두 안보이게 설정
+						$('.id_ok').css("display", "none");
+						$('.id_already').css("display","none");
+					}
+				
+				},
+				
+				error:function(request, error){
+					alert("에러입니다.");
+					alert("code : " + reqeust.status+ "\n"+"message:" + request.responseText+"\n" + "error:" + error);
+					
+				}
+					
+			});
+			
+		};
+	
+
+</script>
+
+</head>
+<body>
+	
+	
+	<div class ="container">
+	
+	<h1 class = "py-5 text-center">회원가입 폼</h1> 
+	
+	<form action="" th:action ="add" th:object="${addMemDTO}" method ="post">
+		
+	<div th:if="${#fields.hasGlobalErrors()}">
+		<p class = "field-error" th:each="err:${#fields.globalErrors()}"
+		 th:text = "${err}">전체오류메세지</p>
+	</div>
+		
+		<div>
+			<label for = "test_Id">로그인 ID</label>
+			<input type = "text" id = "test_Id" name = "test_Id" th:field="*{test_Id}" class = "form-control"
+			th:errorclass = "field-error" required oninput = "checkId()"/>
+			
+			<span class = "id_ok" style = "color:green; display:none;">사용 가능한 아이디입니다.</span>
+			<span class = "id_already" style = "color:red; display:none;">이미 사용중인 아이디입니다.</span>
+			
+			<div class="field-error" th:errors="*{test_Id}"></div>
+			
+		</div>
+		
+		<!-- <button type = "submit" class="btn btn-warning"  th:onclick = "checkId()">중복 확인</button> -->
+
+		
+		 <div>
+			<label for = "password">비밀번호</label>
+			<input type = "password" id = "password" th:field="*{test_Pwd}" class = "form-control"
+			th:errorclass = "field-error"/>
+			
+			<div class="field-error" th:errors="*{test_Pwd}"></div>
+		</div>
+		
+		<div>
+			<label for = "name">이름</label>
+			<input type = "text" id = "name" th:field="*{test_Name}" class = "form-control"
+			th:errorclass = "field-error"/>
+			
+			<div class="field-error" th:errors="*{test_Name}"></div>
+		</div>
+		
+		
+		<div>
+			<label for = "phone">연락처</label>
+			<input type = "text" id = "phone" th:field="*{test_Phone}" class = "form-control"
+			th:errorclass = "field-error"/>
+			
+			<div class="field-error" th:errors="*{test_Phone}"></div>
+		</div>
+		
+		<div>
+			<label for = "email">이메일</label>
+			<input type = "text" id = "email" th:field="*{test_Email}" class = "form-control"
+			th:errorclass = "field-error"/>
+			
+			<div class="field-error" th:errors="*{test_Email}"></div>
+		</div>
+		
+		<hr class = "my-4">
+		
+		<div class = "row">
+			<div class = "col text-center" >
+				<button type = "submit" onclick = "" class="btn btn-warning" >회원가입</button>
+			</div>
+			
+			<div class = "col text-center">
+				<button onclick = "location.href='main.html'" class="btn btn-warning"
+				th:onclick="|location.href='@{/login}'|" type="button">취소</button>
+			</div>
+		</div>
+	
+	</form>
+	
+	</div>
+</body>
+</html>

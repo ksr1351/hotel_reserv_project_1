@@ -1,0 +1,53 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- Bootstrap -->
+    <link type="text/css" rel="stylesheet" href="/resources/testMainPage/css/bootstrap.min.css" />
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    
+<style type="text/css">
+ 		.button-class{
+		  border: 0;
+		  background-color: transparent;
+		  font-size:15px;
+		  color:white;
+		  font-family: "Jalnan";
+		}
+ 	</style>
+
+<script>
+	$(function(){
+		
+		$('#apibtn').click(function(){
+			$.ajax({
+				url: '/pay/kakaopay',
+				dataType:'json',
+				success:function(data){
+					//alert(date.tid);
+					
+					var box = data.next_redirect_pc_url;
+					//window.open(box);
+					window.location.href = box;
+				},
+				
+				error:function(error){
+					alert(error);
+				}
+				
+				
+				
+			});
+		});
+	});
+</script>
+
+</head>
+<body>
+	<button id = "apibtn"><img src = "/resources/imagesKakao/kakao_pay.png"/></button>
+</body>
+</html>

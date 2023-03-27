@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+      
+  <mapper namespace="login">
+  
+  	<!-- 로그인 체크 --> 
+ 	<select id="MemberCheck" parameterType = "testBoard.login.dto.LoginMemDTO" resultType="testBoard.login.dto.LoginMemDTO">
+ 	
+ 		<![CDATA[
+ 		
+ 			SELECT mem_code, mem_Id, mem_Pwd, mem_Name, memberType FROM customer WHERE mem_Id= #{mem_Id}
+ 			
+ 			
+ 		]]>
+ 	
+ 	</select>
+ 	
+ 	
+		
+	
+	<!-- 아이디 중복 체크 -->
+	
+	<select id="IdCheck" parameterType = "String" resultType="int">
+ 	
+ 		<![CDATA[
+ 		
+ 			SELECT count(mem_Id) FROM customer WHERE mem_Id= #{mem_Id, jdbcType=VARCHAR}
+ 			
+ 			
+ 		]]>
+ 	
+ 	</select>
+ 	
+ 	<!-- 카카오 로그인 회원가입 중복 체크 -->
+ 	<select id="kakaoIdCheck" parameterType = "String" resultType="testBoard.login.dto.SessionDTO">
+ 	
+ 		<![CDATA[
+ 		
+ 			SELECT mem_Id, mem_Name FROM customer WHERE mem_Id= #{mem_Id, jdbcType=VARCHAR}
+ 			
+ 			
+ 		]]>
+ 	
+ 	</select>
+ 
+	
+	
+	<!-- 일반회원 회원가입 -->
+	<insert id = "MemberSave" parameterType="testBoard.login.dto.AddMemDTO">
+		<![CDATA[
+			INSERT INTO customer
+			(mem_code, mem_Id, mem_Pwd, mem_Name, mem_Phone, mem_Email, memberType)
+			VALUES(
+			customer_seq.nextval
+			,#{mem_Id}
+			,#{mem_Pwd}
+			,#{mem_Name}
+			,#{mem_Phone}
+			,#{mem_Email}
+			,#{memberType})
+			]]>
+		
+	</insert>
+	
+			
+	
+			
+	
+	
+
+
+</mapper>
+
+

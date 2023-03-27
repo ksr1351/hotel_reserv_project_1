@@ -1,0 +1,38 @@
+package testBoard.board.dto;
+
+public class PayPageDTO {
+	
+	
+	private int room_code;
+	private int hotel_code;
+	
+	private String name;
+	private String room_name;
+	private String room_price;
+	
+	private String checkin;
+	private String checkout;
+	
+	private int days;
+	private int totalPrice;
+	
+	public PayPageDTO() {
+	
+	}
+
+	public PayPageDTO(int room_code, int hotel_code, String name, String room_name, String room_price, String checkin,
+			String checkout, int days, int totalPrice) {
+		this.room_code = room_code;
+		this.hotel_code = hotel_code;
+		this.name = name;
+		this.room_name = room_name;
+		this.room_price = room_price;
+		this.checkin = checkin;
+		this.checkout = checkout;
+		this.days = days;
+		this.totalPrice = totalPrice;
+	}
+	
+	
+	
+}

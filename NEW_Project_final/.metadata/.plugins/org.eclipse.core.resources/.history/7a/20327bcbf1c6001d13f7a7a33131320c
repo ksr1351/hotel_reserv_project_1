@@ -1,0 +1,85 @@
+package testBoard.board.dto;
+
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+public class Hotel_ReviewDTO {
+	private int review_code;
+	private int hotel_code;
+	private int customer_code;
+	private String content;
+	private int rating_value;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date regdate;
+	
+	public Hotel_ReviewDTO() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Hotel_ReviewDTO(int review_code, int hotel_code, int customer_code, String content, int rating_value,
+			Date regdate) {
+		this.review_code = review_code;
+		this.hotel_code = hotel_code;
+		this.customer_code = customer_code;
+		this.content = content;
+		this.rating_value = rating_value;
+		this.regdate = regdate;
+	}
+
+	public int getReview_code() {
+		return review_code;
+	}
+
+	public void setReview_code(int review_code) {
+		this.review_code = review_code;
+	}
+
+	public int getHotel_code() {
+		return hotel_code;
+	}
+
+	public void setHotel_code(int hotel_code) {
+		this.hotel_code = hotel_code;
+	}
+
+	public int getCustomer_code() {
+		return customer_code;
+	}
+
+	public void setCustomer_code(int customer_code) {
+		this.customer_code = customer_code;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public int getRating_value() {
+		return rating_value;
+	}
+
+	public void setRating_value(int rating_value) {
+		this.rating_value = rating_value;
+	}
+
+	public java.util.Date getRegdate() {
+		return regdate;
+	}
+
+	public void setRegdate(java.util.Date regdate) {
+		this.regdate = regdate;
+	}
+
+	@Override
+	public String toString() {
+		return "Hotel_ReviewDTO [review_code=" + review_code + ", hotel_code=" + hotel_code + ", customer_code="
+				+ customer_code + ", content=" + content + ", rating_value=" + rating_value + ", regdate=" + regdate
+				+ "]";
+	}
+}

@@ -1,0 +1,64 @@
+package testBoard.board.dto;
+
+import java.util.List;
+
+public class HotelSearchDTO {
+
+	private List<String> type;
+	private List<String> bedType;
+	private List<String> filter;
+	
+	private String location;
+	
+	public HotelSearchDTO() {
+	}
+
+	public HotelSearchDTO(List<String> type, List<String> bedType, List<String> filter, String location) {
+		this.type = type;
+		this.bedType = bedType;
+		this.filter = filter;
+		this.location = location;
+	}
+
+	public List<String> getType() {
+		return type;
+	}
+
+	public void setType(List<String> type) {
+		this.type = type;
+	}
+
+	public List<String> getBedType() {
+		return bedType;
+	}
+
+	public void setBedType(List<String> bedType) {
+		this.bedType = bedType;
+	}
+
+	public List<String> getFilter() {
+		return filter;
+	}
+
+	public void setFilter(List<String> filter) {
+		this.filter = filter;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	@Override
+	public String toString() {
+		return "HotelSearchDTO [type=" + type + ", bedType=" + bedType + ", filter=" + filter + ", location=" + location
+				+ "]";
+	}
+	
+	
+	
+	
+}
